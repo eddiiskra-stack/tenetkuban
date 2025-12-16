@@ -27,13 +27,13 @@
     {
       "id": "tenet-7",
       "description": "Tenet 7 model car",
-      "imageUrl": "https://images.unsplash.com/photo-1669254382128-9fdc409000d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx3aGl0ZSUyMHNlZGFufGVufDB8fHx8MTc2NTg2NjI1Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/T7.webp",
       "imageHint": "white sedan"
     },
     {
       "id": "tenet-8",
       "description": "Tenet 8 model car",
-      "imageUrl": "https://images.unsplash.com/photo-1612095977457-0f2a6354574c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxibGFjayUyMHNwb3J0c2NhcnxlbnwwfHx8fDE3NjU4Njg2ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/images/T8.webp",
       "imageHint": "black sportscar"
     },
     {
