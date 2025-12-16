@@ -1,10 +1,76 @@
+
+"use client";
+
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { CarFilters } from "@/components/car-filters";
 import { CarListings } from "@/components/car-listings";
 import { HelpForm } from "@/components/help-form";
+import React, { useState, useMemo } from "react";
+import { PlaceHolderImages, ImagePlaceholder } from "@/lib/placeholder-images";
+
+export type Car = {
+  id: string;
+  name: string;
+  price: number;
+  monthly: number;
+  info: string;
+  image: ImagePlaceholder | undefined;
+  gearbox: 'механическая' | 'робот';
+};
+
+const allCars: Car[] = [
+  {
+    id: "tenet-t7",
+    name: "Tenet T7",
+    price: 2140000,
+    monthly: 25663,
+    info: "13 автомобилей - 5 цветов",
+    image: PlaceHolderImages.find((img) => img.id === "tenet-7"),
+    gearbox: "робот",
+  },
+  {
+    id: "tenet-t4",
+    name: "Tenet T4",
+    price: 2490000,
+    monthly: 29860,
+    info: "3 автомобиля - 3 цвета",
+    image: PlaceHolderImages.find((img) => img.id === "tenet-4"),
+    gearbox: "механическая",
+  },
+  {
+    id: "tenet-t8",
+    name: "Tenet T8",
+    price: 3200000,
+    monthly: 38400,
+    info: "5 автомобилей - 4 цвета",
+    image: PlaceHolderImages.find((img) => img.id === "tenet-8"),
+    gearbox: "робот",
+  }
+];
+
 
 export default function Home() {
+  const [gearboxFilter, setGearboxFilter] = useState<string[]>([]);
+
+  const handleGearboxChange = (gearbox: string) => {
+    setGearboxFilter(prev => 
+      prev.includes(gearbox) 
+        ? prev.filter(g => g !== gearbox) 
+        : [...prev, gearbox]
+    );
+  };
+  
+  const filteredCars = useMemo(() => {
+    if (gearboxFilter.length === 0) {
+      return allCars;
+    }
+    if (gearboxFilter.includes('робот')) {
+        return allCars;
+    }
+    return allCars.filter(car => gearboxFilter.includes(car.gearbox));
+  }, [gearboxFilter]);
+
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
@@ -12,10 +78,13 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-6 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             <aside className="lg:col-span-1">
-              <CarFilters />
+              <CarFilters 
+                onGearboxChange={handleGearboxChange}
+                selectedGearboxes={gearboxFilter}
+              />
             </aside>
             <div className="lg:col-span-3 space-y-12">
-              <CarListings />
+              <CarListings cars={filteredCars} />
               <HelpForm />
             </div>
           </div>

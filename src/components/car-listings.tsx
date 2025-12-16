@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from "next/image";
@@ -10,44 +11,22 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import type { Car } from "@/app/page";
 
-const carList = [
-  {
-    id: "tenet-t7",
-    name: "Tenet T7",
-    price: 2140000,
-    monthly: 25663,
-    info: "13 автомобилей - 5 цветов",
-    image: PlaceHolderImages.find((img) => img.id === "tenet-7"),
-  },
-  {
-    id: "tenet-t4",
-    name: "Tenet T4",
-    price: 2490000,
-    monthly: 29860,
-    info: "3 автомобиля - 3 цвета",
-    image: PlaceHolderImages.find((img) => img.id === "tenet-4"),
-  },
-  {
-    id: "tenet-t8",
-    name: "Tenet T8",
-    price: 3200000,
-    monthly: 38400,
-    info: "5 автомобилей - 4 цвета",
-    image: PlaceHolderImages.find((img) => img.id === "tenet-8"),
-  }
-];
 
-export function CarListings() {
+type CarListingsProps = {
+  cars: Car[];
+};
+
+export function CarListings({ cars }: CarListingsProps) {
   return (
     <section>
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
         <h1 className="text-2xl md:text-3xl font-bold font-headline mb-4 md:mb-0">
-          21 НОВЫХ АВТОМОБИЛЕЙ TENET
+          {cars.length} НОВЫХ АВТОМОБИЛЕЙ TENET
         </h1>
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="icon">
@@ -86,7 +65,7 @@ export function CarListings() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {carList.map((car) => (
+        {cars.map((car) => (
           <Card key={car.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
             <CardContent className="p-0">
               <div className="relative">

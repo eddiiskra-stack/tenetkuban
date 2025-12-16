@@ -1,3 +1,4 @@
+
 "use client";
 import React, { useState } from "react";
 import {
@@ -13,7 +14,12 @@ import { Slider } from "@/components/ui/slider";
 
 const colors = ["#ffffff", "#000000", "#a0aec0", "#48bb78", "#4299e1"];
 
-export function CarFilters() {
+type CarFiltersProps = {
+  onGearboxChange: (gearbox: string) => void;
+  selectedGearboxes: string[];
+};
+
+export function CarFilters({ onGearboxChange, selectedGearboxes }: CarFiltersProps) {
   const [priceRange, setPriceRange] = useState([2140000, 3200000]);
 
   return (
@@ -43,7 +49,7 @@ export function CarFilters() {
           </div>
         </div>
 
-        <Accordion type="multiple" defaultValue={["model", "color"]} className="w-full">
+        <Accordion type="multiple" defaultValue={["model", "color", "gearbox"]} className="w-full">
           <AccordionItem value="model">
             <AccordionTrigger className="text-sm font-semibold">МОДЕЛЬ</AccordionTrigger>
             <AccordionContent>
@@ -85,7 +91,24 @@ export function CarFilters() {
           <AccordionItem value="gearbox">
             <AccordionTrigger className="text-sm font-semibold">КОРОБКА</AccordionTrigger>
             <AccordionContent>
-              <p className="text-sm text-muted-foreground">Опции скоро появятся</p>
+              <div className="space-y-2 pt-2">
+                <div className="flex items-center gap-2">
+                  <Checkbox 
+                    id="gearbox-manual" 
+                    onCheckedChange={() => onGearboxChange('механическая')}
+                    checked={selectedGearboxes.includes('механическая')}
+                  />
+                  <label htmlFor="gearbox-manual" className="text-sm cursor-pointer">механическая</label>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Checkbox 
+                    id="gearbox-robot" 
+                    onCheckedChange={() => onGearboxChange('робот')}
+                    checked={selectedGearboxes.includes('робот')}
+                  />
+                  <label htmlFor="gearbox-robot" className="text-sm cursor-pointer">робот</label>
+                </div>
+              </div>
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="body">
