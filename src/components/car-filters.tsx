@@ -43,7 +43,7 @@ export function CarFilters() {
           </div>
         </div>
 
-        <Accordion type="multiple" defaultValue={["model", "color"]} collapsible className="w-full">
+        <Accordion type="multiple" defaultValue={["model", "color"]} className="w-full">
           <AccordionItem value="model">
             <AccordionTrigger className="text-sm font-semibold">МОДЕЛЬ</AccordionTrigger>
             <AccordionContent>
@@ -51,14 +51,14 @@ export function CarFilters() {
                 <div className="flex items-center justify-between">
                   <label htmlFor="tiggo" className="flex items-center gap-2 text-sm cursor-pointer">
                     <Checkbox id="tiggo" />
-                    Tiggo 7L
+                    Tenet 4
                   </label>
                   <span className="text-xs text-muted-foreground">13</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <label htmlFor="arrizo" className="flex items-center gap-2 text-sm cursor-pointer">
                     <Checkbox id="arrizo" />
-                    Arrizo 8
+                    Tenet 7
                   </label>
                   <span className="text-xs text-muted-foreground">3</span>
                 </div>
