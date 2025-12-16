@@ -17,9 +17,11 @@ const colors = ["#ffffff", "#000000", "#a0aec0", "#48bb78", "#4299e1"];
 type CarFiltersProps = {
   onGearboxChange: (gearbox: string) => void;
   selectedGearboxes: string[];
+  onBodyTypeChange: (bodyType: string) => void;
+  selectedBodyTypes: string[];
 };
 
-export function CarFilters({ onGearboxChange, selectedGearboxes }: CarFiltersProps) {
+export function CarFilters({ onGearboxChange, selectedGearboxes, onBodyTypeChange, selectedBodyTypes }: CarFiltersProps) {
   const [priceRange, setPriceRange] = useState([2140000, 3200000]);
 
   return (
@@ -49,7 +51,7 @@ export function CarFilters({ onGearboxChange, selectedGearboxes }: CarFiltersPro
           </div>
         </div>
 
-        <Accordion type="multiple" defaultValue={["model", "color", "gearbox"]} className="w-full">
+        <Accordion type="multiple" defaultValue={["model", "color", "gearbox", "body"]} className="w-full">
           <AccordionItem value="model">
             <AccordionTrigger className="text-sm font-semibold">МОДЕЛЬ</AccordionTrigger>
             <AccordionContent>
@@ -114,7 +116,24 @@ export function CarFilters({ onGearboxChange, selectedGearboxes }: CarFiltersPro
           <AccordionItem value="body">
             <AccordionTrigger className="text-sm font-semibold">КУЗОВ</AccordionTrigger>
             <AccordionContent>
-               <p className="text-sm text-muted-foreground">Опции скоро появятся</p>
+                <div className="space-y-2 pt-2">
+                    <div className="flex items-center gap-2">
+                        <Checkbox 
+                            id="body-hatchback" 
+                            onCheckedChange={() => onBodyTypeChange('хечбек')}
+                            checked={selectedBodyTypes.includes('хечбек')}
+                        />
+                        <label htmlFor="body-hatchback" className="text-sm cursor-pointer">хечбек</label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <Checkbox 
+                            id="body-suv" 
+                            onCheckedChange={() => onBodyTypeChange('внедорожник')}
+                            checked={selectedBodyTypes.includes('внедорожник')}
+                        />
+                        <label htmlFor="body-suv" className="text-sm cursor-pointer">внедорожник</label>
+                    </div>
+                </div>
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="drive">

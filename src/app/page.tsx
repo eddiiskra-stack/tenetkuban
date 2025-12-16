@@ -17,6 +17,7 @@ export type Car = {
   info: string;
   image: ImagePlaceholder | undefined;
   gearbox: 'механическая' | 'робот';
+  bodyType: 'хечбек' | 'внедорожник';
 };
 
 const allCars: Car[] = [
@@ -28,6 +29,7 @@ const allCars: Car[] = [
     info: "13 автомобилей - 5 цветов",
     image: PlaceHolderImages.find((img) => img.id === "tenet-7"),
     gearbox: "робот",
+    bodyType: "внедорожник",
   },
   {
     id: "tenet-t4",
@@ -37,6 +39,7 @@ const allCars: Car[] = [
     info: "3 автомобиля - 3 цвета",
     image: PlaceHolderImages.find((img) => img.id === "tenet-4"),
     gearbox: "механическая",
+    bodyType: "хечбек",
   },
   {
     id: "tenet-t8",
@@ -46,12 +49,14 @@ const allCars: Car[] = [
     info: "5 автомобилей - 4 цвета",
     image: PlaceHolderImages.find((img) => img.id === "tenet-8"),
     gearbox: "робот",
+    bodyType: "внедорожник",
   }
 ];
 
 
 export default function Home() {
   const [gearboxFilter, setGearboxFilter] = useState<string[]>([]);
+  const [bodyTypeFilter, setBodyTypeFilter] = useState<string[]>([]);
 
   const handleGearboxChange = (gearbox: string) => {
     setGearboxFilter(prev => 
@@ -61,15 +66,27 @@ export default function Home() {
     );
   };
   
+  const handleBodyTypeChange = (bodyType: string) => {
+    setBodyTypeFilter(prev =>
+      prev.includes(bodyType)
+        ? prev.filter(b => b !== bodyType)
+        : [...prev, bodyType]
+    );
+  };
+
   const filteredCars = useMemo(() => {
-    if (gearboxFilter.length === 0) {
-      return allCars;
+    let cars = allCars;
+
+    if (gearboxFilter.length > 0 && !gearboxFilter.includes('робот')) {
+      cars = cars.filter(car => gearboxFilter.includes(car.gearbox));
     }
-    if (gearboxFilter.includes('робот')) {
-        return allCars;
+    
+    if (bodyTypeFilter.length > 0) {
+      cars = cars.filter(car => bodyTypeFilter.includes(car.bodyType));
     }
-    return allCars.filter(car => gearboxFilter.includes(car.gearbox));
-  }, [gearboxFilter]);
+
+    return cars;
+  }, [gearboxFilter, bodyTypeFilter]);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -81,6 +98,8 @@ export default function Home() {
               <CarFilters 
                 onGearboxChange={handleGearboxChange}
                 selectedGearboxes={gearboxFilter}
+                onBodyTypeChange={handleBodyTypeChange}
+                selectedBodyTypes={bodyTypeFilter}
               />
             </aside>
             <div className="lg:col-span-3 space-y-12">
