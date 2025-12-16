@@ -1,3 +1,34 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-background",
+      "description": "A sleek car driving on a scenic road at dusk",
+      "imageUrl": "https://images.unsplash.com/photo-1543265832-56c79a5caf97?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxjYXIlMjBkcml2aW5nfGVufDB8fHx8MTc2NTkxNTc0N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "car driving"
+    },
+    {
+      "id": "tenet-4",
+      "description": "Tenet 4 model car",
+      "imageUrl": "https://images.unsplash.com/photo-1660056978175-03b8f1401d78?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxyZWQlMjBzdXZ8ZW58MHx8fHwxNzY1ODQ0NjEzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "red suv"
+    },
+    {
+      "id": "tenet-7",
+      "description": "Tenet 7 model car",
+      "imageUrl": "https://images.unsplash.com/photo-1669254382128-9fdc409000d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx3aGl0ZSUyMHNlZGFufGVufDB8fHx8MTc2NTg2NjI1Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "white sedan"
+    },
+    {
+      "id": "tenet-8",
+      "description": "Tenet 8 model car",
+      "imageUrl": "https://images.unsplash.com/photo-1612095977457-0f2a6354574c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxibGFjayUyMHNwb3J0c2NhcnxlbnwwfHx8fDE3NjU4Njg2ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "black sportscar"
+    },
+    {
+      "id": "tenet-9",
+      "description": "Tenet 9 model car",
+      "imageUrl": "https://images.unsplash.com/photo-1764370699188-15ac87e00bbb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxibHVlJTIwY3Jvc3NvdmVyfGVufDB8fHx8MTc2NTkxNTc0N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "blue crossover"
+    }
+  ]
 }
