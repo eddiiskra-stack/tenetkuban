@@ -1,10 +1,22 @@
 {
   "placeholderImages": [
     {
-      "id": "hero-background",
-      "description": "A sleek car driving on a scenic road at dusk",
-      "imageUrl": "https://images.unsplash.com/photo-1543265832-56c79a5caf97?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxjYXIlMjBkcml2aW5nfGVufDB8fHx8MTc2NTkxNTc0N3ww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "car driving"
+      "id": "hero-slide-1",
+      "description": "Red SUV in a snowy city street",
+      "imageUrl": "https://images.unsplash.com/photo-1721759689433-255d6796c8a7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxyZWQlMjBTVSUyMGluJTIwc25vd3klMjBjaXR5fGVufDB8fHx8MTcyMTk0MTE3N3ww&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "red suv"
+    },
+    {
+      "id": "hero-slide-2",
+      "description": "A sleek silver car on a mountain road",
+      "imageUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxzbGVlayUyMHNpbHZlciUyMGNhcnxlbnwwfHx8fDE3MjE5NDEyMjF8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "silver car"
+    },
+    {
+      "id": "hero-slide-3",
+      "description": "Interior shot of a modern car dashboard",
+      "imageUrl": "https://images.unsplash.com/photo-1554223090-7e48285a3643?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxtb2Rlcm4lMjBjYXIlMjBpbnRlcmlvcnxlbnwwfHx8fDE3MjE5NDEyNDV8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "car interior"
     },
     {
       "id": "tenet-4",
