@@ -18,6 +18,7 @@ export type Car = {
   image: ImagePlaceholder | undefined;
   gearbox: 'механическая' | 'робот';
   bodyType: 'хечбек' | 'внедорожник';
+  count: number;
 };
 
 const allCars: Car[] = [
@@ -26,30 +27,33 @@ const allCars: Car[] = [
     name: "Tenet T7",
     price: 2140000,
     monthly: 25663,
-    info: "13 автомобилей - 5 цветов",
+    info: "5 цветов",
     image: PlaceHolderImages.find((img) => img.id === "tenet-7"),
     gearbox: "робот",
     bodyType: "внедорожник",
+    count: 13,
   },
   {
     id: "tenet-t4",
     name: "Tenet T4",
     price: 2490000,
     monthly: 29860,
-    info: "3 автомобиля - 3 цвета",
+    info: "3 цвета",
     image: PlaceHolderImages.find((img) => img.id === "tenet-4"),
     gearbox: "механическая",
     bodyType: "хечбек",
+    count: 3,
   },
   {
     id: "tenet-t8",
     name: "Tenet T8",
     price: 3200000,
     monthly: 38400,
-    info: "5 автомобилей - 4 цвета",
+    info: "4 цвета",
     image: PlaceHolderImages.find((img) => img.id === "tenet-8"),
     gearbox: "робот",
     bodyType: "внедорожник",
+    count: 5,
   }
 ];
 
@@ -87,6 +91,10 @@ export default function Home() {
 
     return cars;
   }, [gearboxFilter, bodyTypeFilter]);
+  
+  const totalCarCount = useMemo(() => {
+    return filteredCars.reduce((total, car) => total + car.count, 0);
+  }, [filteredCars]);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -100,11 +108,11 @@ export default function Home() {
                 selectedGearboxes={gearboxFilter}
                 onBodyTypeChange={handleBodyTypeChange}
                 selectedBodyTypes={bodyTypeFilter}
-                carCount={filteredCars.length}
+                carCount={totalCarCount}
               />
             </aside>
             <div className="lg:col-span-3 space-y-12">
-              <CarListings cars={filteredCars} />
+              <CarListings cars={filteredCars} totalCarCount={totalCarCount} />
               <HelpForm />
             </div>
           </div>

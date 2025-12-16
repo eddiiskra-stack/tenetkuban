@@ -19,14 +19,32 @@ import type { Car } from "@/app/page";
 
 type CarListingsProps = {
   cars: Car[];
+  totalCarCount: number;
 };
 
-export function CarListings({ cars }: CarListingsProps) {
+export function CarListings({ cars, totalCarCount }: CarListingsProps) {
+
+  const getCarNoun = (count: number) => {
+    const lastDigit = count % 10;
+    const lastTwoDigits = count % 100;
+
+    if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
+      return 'НОВЫХ АВТОМОБИЛЕЙ';
+    }
+    if (lastDigit === 1) {
+      return 'НОВЫЙ АВТОМОБИЛЬ';
+    }
+    if (lastDigit >= 2 && lastDigit <= 4) {
+      return 'НОВЫХ АВТОМОБИЛЯ';
+    }
+    return 'НОВЫХ АВТОМОБИЛЕЙ';
+  };
+
   return (
     <section>
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
         <h1 className="text-2xl md:text-3xl font-bold font-headline mb-4 md:mb-0">
-          {cars.length > 0 ? `${cars.length} ${cars.length === 1 ? 'НОВЫЙ АВТОМОБИЛЬ' : cars.length < 5 ? 'НОВЫХ АВТОМОБИЛЯ' : 'НОВЫХ АВТОМОБИЛЕЙ'} TENET` : 'НОВЫЕ АВТОМОБИЛИ TENET'}
+          {totalCarCount > 0 ? `${totalCarCount} ${getCarNoun(totalCarCount)} TENET` : 'НОВЫЕ АВТОМОБИЛИ TENET'}
         </h1>
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="icon">
@@ -82,7 +100,7 @@ export function CarListings({ cars }: CarListingsProps) {
                 <Badge variant="default" className="absolute top-2 left-2 bg-red-600 text-white">Выгода</Badge>
               </div>
               <div className="p-4">
-                <p className="text-sm text-muted-foreground">{car.info}</p>
+                <p className="text-sm text-muted-foreground">{car.count} автомобилей - {car.info}</p>
                 <h3 className="text-lg font-bold font-headline mt-1">{car.name}</h3>
                 <p className="text-xl font-bold text-primary mt-2">
                   от {car.price.toLocaleString("ru-RU")} ₽

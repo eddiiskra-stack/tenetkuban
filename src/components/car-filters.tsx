@@ -24,6 +24,23 @@ type CarFiltersProps = {
 
 export function CarFilters({ onGearboxChange, selectedGearboxes, onBodyTypeChange, selectedBodyTypes, carCount }: CarFiltersProps) {
   const [priceRange, setPriceRange] = useState([2140000, 3200000]);
+  
+  const getCarNoun = (count: number) => {
+    const lastDigit = count % 10;
+    const lastTwoDigits = count % 100;
+
+    if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
+      return 'новых автомобилей';
+    }
+    if (lastDigit === 1) {
+      return 'новый автомобиль';
+    }
+    if (lastDigit >= 2 && lastDigit <= 4) {
+      return 'новых автомобиля';
+    }
+    return 'новых автомобилей';
+  };
+
 
   return (
     <div className="p-6 bg-card rounded-lg shadow-sm border">
@@ -146,7 +163,7 @@ export function CarFilters({ onGearboxChange, selectedGearboxes, onBodyTypeChang
         </Accordion>
       </div>
       <div className="mt-8 border-t pt-6">
-        <p className="text-sm text-muted-foreground mb-4">Подходит {carCount} {carCount === 1 ? 'новый автомобиль' : carCount > 1 && carCount < 5 ? 'новых автомобиля' : 'новых автомобилей'}</p>
+        <p className="text-sm text-muted-foreground mb-4">Подходит {carCount} {getCarNoun(carCount)}</p>
         <Button variant="outline" className="w-full">
           Очистить фильтры
         </Button>
