@@ -103,7 +103,7 @@ export function CarListings({ cars, totalCarCount }: CarListingsProps) {
                 <p className="text-sm text-muted-foreground">{car.count} автомобилей - {car.info}</p>
                 <h3 className="text-lg font-bold font-headline mt-1">{car.name}</h3>
                 <p className="text-xl font-bold text-primary mt-2">
-                  от {car.price.toLocaleString("ru-RU")} ₽
+                  от {car.price.toLocaleString("ru-RU")}* ₽
                 </p>
                 <p className="text-sm text-green-600 font-semibold mt-1">
                   от {car.monthly.toLocaleString("ru-RU")} ₽ в месяц
