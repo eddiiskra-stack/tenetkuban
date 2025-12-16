@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Car, Phone } from "lucide-react";
+import { Car, MapPin, Phone } from "lucide-react";
 
 export function SiteHeader() {
   return (
@@ -8,7 +8,7 @@ export function SiteHeader() {
         <div className="mr-4 flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
             <Car className="h-6 w-6 text-primary" />
-            <span className="font-bold font-headline text-lg">Tenet</span>
+            <span className="font-bold font-headline text-lg">TENET Сервис Кубань</span>
           </Link>
           <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
             <Link
@@ -31,11 +31,15 @@ export function SiteHeader() {
             </Link>
           </nav>
         </div>
-        <div className="flex flex-1 items-center justify-end space-x-4">
-           <a href="tel:+78619929292" className="hidden sm:flex items-center text-sm font-medium transition-colors hover:text-primary">
+        <div className="flex flex-1 items-center justify-end space-x-6">
+           <a href="tel:+79631625082" className="hidden sm:flex items-center text-sm font-medium transition-colors hover:text-primary">
               <Phone className="mr-2 h-4 w-4" />
-              +7 (861) 992-92-92
+              +7 (963) 162-50-82
            </a>
+           <div className="hidden lg:flex items-center text-sm text-muted-foreground">
+              <MapPin className="mr-2 h-4 w-4" />
+              Краснодар, ул. Горячеключевская, д. 2, к.1
+           </div>
         </div>
       </div>
     </header>
