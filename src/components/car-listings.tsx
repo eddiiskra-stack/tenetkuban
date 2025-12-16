@@ -17,21 +17,29 @@ import { Button } from "@/components/ui/button";
 
 const carList = [
   {
-    id: "tiggo-7l",
-    name: "Tiggo 7L",
+    id: "tenet-t7",
+    name: "Tenet T7",
     price: 2140000,
     monthly: 25663,
     info: "13 автомобилей - 5 цветов",
-    image: PlaceHolderImages.find((img) => img.id === "tenet-4"),
+    image: PlaceHolderImages.find((img) => img.id === "tenet-7"),
   },
   {
-    id: "arrizo-8",
-    name: "Arrizo 8",
+    id: "tenet-t4",
+    name: "Tenet T4",
     price: 2490000,
     monthly: 29860,
     info: "3 автомобиля - 3 цвета",
-    image: PlaceHolderImages.find((img) => img.id === "tenet-7"),
+    image: PlaceHolderImages.find((img) => img.id === "tenet-4"),
   },
+  {
+    id: "tenet-t8",
+    name: "Tenet T8",
+    price: 3200000,
+    monthly: 38400,
+    info: "5 автомобилей - 4 цвета",
+    image: PlaceHolderImages.find((img) => img.id === "tenet-8"),
+  }
 ];
 
 export function CarListings() {
@@ -39,7 +47,7 @@ export function CarListings() {
     <section>
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
         <h1 className="text-2xl md:text-3xl font-bold font-headline mb-4 md:mb-0">
-          16 НОВЫХ АВТОМОБИЛЕЙ CHERY
+          21 НОВЫХ АВТОМОБИЛЕЙ TENET
         </h1>
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="icon">

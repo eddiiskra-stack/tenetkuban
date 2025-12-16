@@ -14,7 +14,7 @@ import { Slider } from "@/components/ui/slider";
 const colors = ["#ffffff", "#000000", "#a0aec0", "#48bb78", "#4299e1"];
 
 export function CarFilters() {
-  const [priceRange, setPriceRange] = useState([2140000, 2490000]);
+  const [priceRange, setPriceRange] = useState([2140000, 3200000]);
 
   return (
     <div className="p-6 bg-card rounded-lg shadow-sm border">
@@ -49,18 +49,25 @@ export function CarFilters() {
             <AccordionContent>
               <div className="space-y-2 pt-2">
                 <div className="flex items-center justify-between">
-                  <label htmlFor="tiggo" className="flex items-center gap-2 text-sm cursor-pointer">
-                    <Checkbox id="tiggo" />
-                    Tenet 4
+                  <label htmlFor="tenet-t4" className="flex items-center gap-2 text-sm cursor-pointer">
+                    <Checkbox id="tenet-t4" />
+                    Tenet T4
+                  </label>
+                  <span className="text-xs text-muted-foreground">3</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <label htmlFor="tenet-t7" className="flex items-center gap-2 text-sm cursor-pointer">
+                    <Checkbox id="tenet-t7" />
+                    Tenet T7
                   </label>
                   <span className="text-xs text-muted-foreground">13</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <label htmlFor="arrizo" className="flex items-center gap-2 text-sm cursor-pointer">
-                    <Checkbox id="arrizo" />
-                    Tenet 7
+                  <label htmlFor="tenet-t8" className="flex items-center gap-2 text-sm cursor-pointer">
+                    <Checkbox id="tenet-t8" />
+                    Tenet T8
                   </label>
-                  <span className="text-xs text-muted-foreground">3</span>
+                  <span className="text-xs text-muted-foreground">5</span>
                 </div>
               </div>
             </AccordionContent>
@@ -114,7 +121,7 @@ export function CarFilters() {
         </Accordion>
       </div>
       <div className="mt-8 border-t pt-6">
-        <p className="text-sm text-muted-foreground mb-4">Подходит 16 новых автомобилей</p>
+        <p className="text-sm text-muted-foreground mb-4">Подходит 21 новый автомобиль</p>
         <Button variant="outline" className="w-full">
           Очистить фильтры
         </Button>
