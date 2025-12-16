@@ -77,7 +77,7 @@ export default function Home() {
   const filteredCars = useMemo(() => {
     let cars = allCars;
 
-    if (gearboxFilter.length > 0 && !gearboxFilter.includes('робот')) {
+    if (gearboxFilter.length > 0) {
       cars = cars.filter(car => gearboxFilter.includes(car.gearbox));
     }
     
@@ -100,6 +100,7 @@ export default function Home() {
                 selectedGearboxes={gearboxFilter}
                 onBodyTypeChange={handleBodyTypeChange}
                 selectedBodyTypes={bodyTypeFilter}
+                carCount={filteredCars.length}
               />
             </aside>
             <div className="lg:col-span-3 space-y-12">

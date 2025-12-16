@@ -19,9 +19,10 @@ type CarFiltersProps = {
   selectedGearboxes: string[];
   onBodyTypeChange: (bodyType: string) => void;
   selectedBodyTypes: string[];
+  carCount: number;
 };
 
-export function CarFilters({ onGearboxChange, selectedGearboxes, onBodyTypeChange, selectedBodyTypes }: CarFiltersProps) {
+export function CarFilters({ onGearboxChange, selectedGearboxes, onBodyTypeChange, selectedBodyTypes, carCount }: CarFiltersProps) {
   const [priceRange, setPriceRange] = useState([2140000, 3200000]);
 
   return (
@@ -145,7 +146,7 @@ export function CarFilters({ onGearboxChange, selectedGearboxes, onBodyTypeChang
         </Accordion>
       </div>
       <div className="mt-8 border-t pt-6">
-        <p className="text-sm text-muted-foreground mb-4">Подходит 21 новый автомобиль</p>
+        <p className="text-sm text-muted-foreground mb-4">Подходит {carCount} {carCount === 1 ? 'новый автомобиль' : carCount > 1 && carCount < 5 ? 'новых автомобиля' : 'новых автомобилей'}</p>
         <Button variant="outline" className="w-full">
           Очистить фильтры
         </Button>

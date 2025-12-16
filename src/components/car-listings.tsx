@@ -26,7 +26,7 @@ export function CarListings({ cars }: CarListingsProps) {
     <section>
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
         <h1 className="text-2xl md:text-3xl font-bold font-headline mb-4 md:mb-0">
-          {cars.length} НОВЫХ АВТОМОБИЛЕЙ TENET
+          {cars.length > 0 ? `${cars.length} ${cars.length === 1 ? 'НОВЫЙ АВТОМОБИЛЬ' : cars.length < 5 ? 'НОВЫХ АВТОМОБИЛЯ' : 'НОВЫХ АВТОМОБИЛЕЙ'} TENET` : 'НОВЫЕ АВТОМОБИЛИ TENET'}
         </h1>
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="icon">
