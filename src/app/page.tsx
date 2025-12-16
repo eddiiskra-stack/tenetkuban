@@ -1,21 +1,25 @@
 import { SiteHeader } from "@/components/site-header";
-import { CarCalculator } from "@/components/car-calculator";
 import { SiteFooter } from "@/components/site-footer";
-import { HeroSlider } from "@/components/hero-slider";
+import { CarFilters } from "@/components/car-filters";
+import { CarListings } from "@/components/car-listings";
+import { HelpForm } from "@/components/help-form";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
-      <main className="flex-1">
-        <section className="relative w-full">
-          <HeroSlider />
-        </section>
-        <section id="calculator" className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <CarCalculator />
+      <main className="flex-1 w-full bg-background">
+        <div className="container mx-auto px-4 md:px-6 py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <aside className="lg:col-span-1">
+              <CarFilters />
+            </aside>
+            <div className="lg:col-span-3 space-y-12">
+              <CarListings />
+              <HelpForm />
+            </div>
           </div>
-        </section>
+        </div>
       </main>
       <SiteFooter />
     </div>
