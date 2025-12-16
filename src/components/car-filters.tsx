@@ -136,24 +136,6 @@ export function CarFilters({ onGearboxChange, selectedGearboxes, onBodyTypeChang
                 </div>
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value="drive">
-            <AccordionTrigger className="text-sm font-semibold">ПРИВОД</AccordionTrigger>
-            <AccordionContent>
-               <p className="text-sm text-muted-foreground">Опции скоро появятся</p>
-            </AccordionContent>
-          </AccordionItem>
-           <AccordionItem value="fuel">
-            <AccordionTrigger className="text-sm font-semibold">ТИП ТОПЛИВА</AccordionTrigger>
-            <AccordionContent>
-               <p className="text-sm text-muted-foreground">Опции скоро появятся</p>
-            </AccordionContent>
-          </AccordionItem>
-           <AccordionItem value="power">
-            <AccordionTrigger className="text-sm font-semibold">МОЩНОСТЬ, Л.С.</AccordionTrigger>
-            <AccordionContent>
-               <p className="text-sm text-muted-foreground">Опции скоро появятся</p>
-            </AccordionContent>
-          </AccordionItem>
            <AccordionItem value="seats">
             <AccordionTrigger className="text-sm font-semibold">КОЛИЧЕСТВО МЕСТ</AccordionTrigger>
             <AccordionContent>
