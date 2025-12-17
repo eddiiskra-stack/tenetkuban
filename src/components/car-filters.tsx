@@ -15,6 +15,10 @@ import { Slider } from "@/components/ui/slider";
 const colors = ["#ffffff", "#000000", "#a0aec0", "#48bb78", "#4299e1"];
 
 type CarFiltersProps = {
+  minPrice: number;
+  maxPrice: number;
+  priceRange: [number, number];
+  onPriceChange: (value: [number, number]) => void;
   onGearboxChange: (gearbox: string) => void;
   selectedGearboxes: string[];
   onBodyTypeChange: (bodyType: string) => void;
@@ -24,8 +28,19 @@ type CarFiltersProps = {
   carCount: number;
 };
 
-export function CarFilters({ onGearboxChange, selectedGearboxes, onBodyTypeChange, selectedBodyTypes, onSeatsChange, selectedSeats, carCount }: CarFiltersProps) {
-  const [priceRange, setPriceRange] = useState([2140000, 3200000]);
+export function CarFilters({ 
+  minPrice, 
+  maxPrice, 
+  priceRange, 
+  onPriceChange, 
+  onGearboxChange, 
+  selectedGearboxes, 
+  onBodyTypeChange, 
+  selectedBodyTypes, 
+  onSeatsChange, 
+  selectedSeats, 
+  carCount 
+}: CarFiltersProps) {
   
   const getCarNoun = (count: number) => {
     const lastDigit = count % 10;
@@ -50,11 +65,11 @@ export function CarFilters({ onGearboxChange, selectedGearboxes, onBodyTypeChang
         <div>
           <h3 className="text-sm font-semibold mb-2">ЦЕНА, Р</h3>
           <Slider
-            min={1000000}
-            max={5000000}
+            min={minPrice}
+            max={maxPrice}
             step={10000}
             value={priceRange}
-            onValueChange={(value) => setPriceRange(value as [number, number])}
+            onValueChange={(value) => onPriceChange(value as [number, number])}
             className="mb-4"
           />
           <div className="flex justify-between items-center text-sm">

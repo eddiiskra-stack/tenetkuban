@@ -67,6 +67,11 @@ export default function Home() {
   const [bodyTypeFilter, setBodyTypeFilter] = useState<string[]>([]);
   const [seatsFilter, setSeatsFilter] = useState<number[]>([]);
 
+  const minPrice = useMemo(() => Math.min(...allCars.map(car => car.price)), []);
+  const maxPrice = useMemo(() => Math.max(...allCars.map(car => car.price)), []);
+
+  const [priceRange, setPriceRange] = useState<[number, number]>([minPrice, maxPrice]);
+
   const handleGearboxChange = (gearbox: string) => {
     setGearboxFilter(prev => 
       prev.includes(gearbox) 
@@ -91,8 +96,14 @@ export default function Home() {
     );
   };
 
+  const handlePriceChange = (newRange: [number, number]) => {
+    setPriceRange(newRange);
+  };
+
   const filteredCars = useMemo(() => {
     let cars = allCars;
+
+    cars = cars.filter(car => car.price >= priceRange[0] && car.price <= priceRange[1]);
 
     if (gearboxFilter.length > 0) {
       cars = cars.filter(car => gearboxFilter.includes(car.gearbox));
@@ -107,7 +118,7 @@ export default function Home() {
     }
 
     return cars;
-  }, [gearboxFilter, bodyTypeFilter, seatsFilter]);
+  }, [gearboxFilter, bodyTypeFilter, seatsFilter, priceRange]);
   
   const totalCarCount = useMemo(() => {
     return filteredCars.reduce((total, car) => total + car.count, 0);
@@ -121,6 +132,10 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             <aside className="lg:col-span-1">
               <CarFilters 
+                minPrice={minPrice}
+                maxPrice={maxPrice}
+                priceRange={priceRange}
+                onPriceChange={handlePriceChange}
                 onGearboxChange={handleGearboxChange}
                 selectedGearboxes={gearboxFilter}
                 onBodyTypeChange={handleBodyTypeChange}
