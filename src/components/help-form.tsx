@@ -17,8 +17,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
-import { saveLead } from "@/app/actions";
 import { Loader2 } from "lucide-react";
+import { db } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 const helpFormSchema = z.object({
   name: z.string().min(1, { message: "Пожалуйста, представьтесь" }),
@@ -53,18 +54,18 @@ export function HelpForm() {
                 phone: data.phone,
                 model: 'Не указана',
                 trim: 'Не указана',
-                price: 0
+                price: 0,
+                createdAt: serverTimestamp(),
             };
-            const result = await saveLead(leadData);
-            if (result.success) {
-                toast({
-                    title: "Заявка отправлена!",
-                    description: "Наш менеджер скоро свяжется с вами.",
-                });
-                form.reset();
-            } else {
-                throw new Error(result.error || "Не удалось отправить заявку.");
-            }
+            
+            await addDoc(collection(db, "leads"), leadData);
+
+            toast({
+                title: "Заявка отправлена!",
+                description: "Наш менеджер скоро свяжется с вами.",
+            });
+            form.reset();
+
         } catch (error) {
             toast({
                 variant: "destructive",

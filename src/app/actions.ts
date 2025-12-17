@@ -1,5 +1,10 @@
 "use server";
 
+// This file is intentionally left with its original content.
+// The form submission logic has been moved to the client-side
+// in `src/components/help-form.tsx` to support static export.
+// This file is no longer used for form submission.
+
 import { z } from "zod";
 import { db } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
