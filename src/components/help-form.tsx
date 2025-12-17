@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 export function HelpForm() {
   return (
-    <Card className="w-full max-w-3xl mx-auto shadow-none border-t border-b-0 border-l-0 border-r-0 rounded-none py-12 bg-transparent">
+    <Card id="help-form" className="w-full max-w-3xl mx-auto shadow-none border-t border-b-0 border-l-0 border-r-0 rounded-none py-12 bg-transparent">
       <CardHeader className="text-center px-0">
         <CardTitle className="text-3xl font-headline">НУЖНА ПОМОЩЬ С ВЫБОРОМ АВТОМОБИЛЯ?</CardTitle>
         <CardDescription>

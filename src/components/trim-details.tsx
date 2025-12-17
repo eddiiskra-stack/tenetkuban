@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import type { Trim } from "@/lib/cars";
+import Link from "next/link";
 
 type TrimDetailsProps = {
   trims: Trim[];
@@ -74,7 +75,9 @@ export function TrimDetails({ trims }: TrimDetailsProps) {
             <TableCell></TableCell>
             {trims.map((trim) => (
               <TableCell key={trim.name} className="p-4 text-center">
-                <Button className="w-full">Получить предложение</Button>
+                <Link href="/#help-form">
+                  <Button className="w-full">Получить предложение</Button>
+                </Link>
               </TableCell>
             ))}
           </TableRow>

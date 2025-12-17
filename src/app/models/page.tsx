@@ -52,9 +52,11 @@ export default function ModelsPage() {
                       <Link href={`/models/${car.id}`} className="flex-1">
                         <Button className="w-full">Подробнее</Button>
                       </Link>
-                      <Button variant="outline" className="flex-1">
-                        Тест-драйв
-                      </Button>
+                      <Link href="/#help-form" className="flex-1">
+                        <Button variant="outline" className="w-full">
+                          Тест-драйв
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </CardContent>
