@@ -24,6 +24,12 @@ import {
   Users,
 } from "lucide-react";
 
+export async function generateStaticParams() {
+  return allCars.map((car) => ({
+    slug: car.id,
+  }));
+}
+
 export default function ModelPage({ params }: { params: { slug: string } }) {
   const car = allCars.find((c) => c.id === params.slug);
 
