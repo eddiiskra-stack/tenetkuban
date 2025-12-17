@@ -1,4 +1,4 @@
-import { Car, Github, MapPin, Phone, Twitter, Youtube } from "lucide-react";
+import { MapPin, Phone } from "lucide-react";
 
 export function SiteFooter() {
   return (
@@ -6,7 +6,6 @@ export function SiteFooter() {
       <div className="container py-10">
         <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
           <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-            <Car className="h-6 w-6 text-primary" />
             <p className="text-center text-sm leading-loose md:text-left">
               © {new Date().getFullYear()} TENET Сервис Кубань. Официальный дилер в Краснодаре.
             </p>
