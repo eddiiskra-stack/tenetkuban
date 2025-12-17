@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import { MapPin, Phone } from "lucide-react";
 
@@ -17,7 +18,7 @@ export function SiteHeader() {
               Калькулятор
             </Link>
             <Link
-              href="#"
+              href="/models"
               className="transition-colors hover:text-foreground/80 text-foreground/60"
             >
               Модели
