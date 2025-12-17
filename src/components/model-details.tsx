@@ -84,6 +84,14 @@ export function ModelDetails({ car }: { car: Car }) {
         </div>
       </div>
       
+      {car.seoText && (
+        <div className="mt-16 bg-card p-8 rounded-lg shadow-sm border">
+            <h2 className="text-2xl font-bold font-headline mb-4">{car.seoText.title}</h2>
+            <p className="text-muted-foreground mb-4 leading-relaxed">{car.seoText.description}</p>
+            <p className="font-semibold">{car.seoText.audience}</p>
+        </div>
+      )}
+
       <div className="mt-16">
         <h2 className="text-3xl font-bold font-headline mb-6 text-center">
           Комплектации и цены
