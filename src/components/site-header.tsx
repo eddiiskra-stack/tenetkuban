@@ -24,7 +24,7 @@ export function SiteHeader() {
               Модели
             </Link>
             <Link
-              href="#"
+              href="#contacts"
               className="transition-colors hover:text-foreground/80 text-foreground/60"
             >
               Контакты
