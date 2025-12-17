@@ -25,14 +25,19 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          NODE_ENV: production
 
       - name: Deploy to Yandex Cloud
         env:
-          YANDEX_TOKEN: ${{ secrets.YANDEX_TOKEN }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.YC_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_KEY }}
+          AWS_DEFAULT_REGION: ru-central1
         run: |
-          # This is a placeholder for the Yandex Cloud CLI deployment command.
-          # You may need to install the 'cdi' CLI first.
-          echo "Deploying to Yandex Cloud..."
-          # cdi deploy --source .next/ --target my-yandex-bucket
-          echo "Deployment successful (simulation)."
-
+          echo "Syncing to Yandex Cloud Storage..."
+          aws s3 sync ./out s3://${{ secrets.YC_BUCKET_NAME }} \
+            --endpoint-url=https://storage.yandexcloud.net \
+            --delete \
+            --no-progress \
+            --acl public-read
+          echo "Deployment successful."
