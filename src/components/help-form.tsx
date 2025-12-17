@@ -67,10 +67,11 @@ export function HelpForm() {
             form.reset();
 
         } catch (error) {
+            console.error("Firestore submission error:", error); // Added for debugging
             toast({
                 variant: "destructive",
                 title: "Ошибка",
-                description: error instanceof Error ? error.message : "Произошла неизвестная ошибка.",
+                description: "Не удалось отправить заявку. Проверьте консоль для деталей.",
             });
         } finally {
             setIsSubmitting(false);
