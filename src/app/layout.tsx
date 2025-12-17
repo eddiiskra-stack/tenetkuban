@@ -28,6 +28,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <head>
+        <link rel="icon" href="/images/favicon.ico" sizes="any" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
