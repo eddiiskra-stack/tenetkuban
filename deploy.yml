@@ -1,0 +1,40 @@
+name: Deploy Tenet Site to Yandex Cloud
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Project
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Deploy to Yandex Cloud Storage
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.YC_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_KEY }}
+          AWS_DEFAULT_REGION: ru-central1
+        run: |
+          aws s3 sync ./dist s3://${{ secrets.YC_BUCKET_NAME }} \
+            --endpoint-url=https://storage.yandexcloud.net \
+            --delete \
+            --no-progress \
+            --acl public-read
