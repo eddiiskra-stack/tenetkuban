@@ -49,7 +49,7 @@ export default function ModelsPage() {
                       </p>
                     </div>
                     <div className="mt-6 flex flex-col sm:flex-row gap-2">
-                       <Link href={`/models/${car.id}`} className="flex-1">
+                      <Link href={`/models/${car.id}`} className="flex-1">
                         <Button className="w-full">Подробнее</Button>
                       </Link>
                       <Button variant="outline" className="flex-1">
