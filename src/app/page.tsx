@@ -19,6 +19,7 @@ export type Car = {
   gearbox: 'механическая' | 'робот';
   bodyType: 'хечбек' | 'внедорожник';
   count: number;
+  seats: number;
 };
 
 const allCars: Car[] = [
@@ -32,6 +33,7 @@ const allCars: Car[] = [
     gearbox: "робот",
     bodyType: "внедорожник",
     count: 13,
+    seats: 5,
   },
   {
     id: "tenet-t4",
@@ -43,6 +45,7 @@ const allCars: Car[] = [
     gearbox: "механическая",
     bodyType: "хечбек",
     count: 3,
+    seats: 5,
   },
   {
     id: "tenet-t8",
@@ -54,6 +57,7 @@ const allCars: Car[] = [
     gearbox: "робот",
     bodyType: "внедорожник",
     count: 5,
+    seats: 7,
   }
 ];
 
@@ -61,6 +65,7 @@ const allCars: Car[] = [
 export default function Home() {
   const [gearboxFilter, setGearboxFilter] = useState<string[]>([]);
   const [bodyTypeFilter, setBodyTypeFilter] = useState<string[]>([]);
+  const [seatsFilter, setSeatsFilter] = useState<number[]>([]);
 
   const handleGearboxChange = (gearbox: string) => {
     setGearboxFilter(prev => 
@@ -78,6 +83,14 @@ export default function Home() {
     );
   };
 
+  const handleSeatsChange = (seats: number) => {
+    setSeatsFilter(prev =>
+      prev.includes(seats)
+        ? prev.filter(s => s !== seats)
+        : [...prev, seats]
+    );
+  };
+
   const filteredCars = useMemo(() => {
     let cars = allCars;
 
@@ -89,8 +102,12 @@ export default function Home() {
       cars = cars.filter(car => bodyTypeFilter.includes(car.bodyType));
     }
 
+    if (seatsFilter.length > 0) {
+        cars = cars.filter(car => seatsFilter.includes(car.seats));
+    }
+
     return cars;
-  }, [gearboxFilter, bodyTypeFilter]);
+  }, [gearboxFilter, bodyTypeFilter, seatsFilter]);
   
   const totalCarCount = useMemo(() => {
     return filteredCars.reduce((total, car) => total + car.count, 0);
@@ -108,6 +125,8 @@ export default function Home() {
                 selectedGearboxes={gearboxFilter}
                 onBodyTypeChange={handleBodyTypeChange}
                 selectedBodyTypes={bodyTypeFilter}
+                onSeatsChange={handleSeatsChange}
+                selectedSeats={seatsFilter}
                 carCount={totalCarCount}
               />
             </aside>

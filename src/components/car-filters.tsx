@@ -19,10 +19,12 @@ type CarFiltersProps = {
   selectedGearboxes: string[];
   onBodyTypeChange: (bodyType: string) => void;
   selectedBodyTypes: string[];
+  onSeatsChange: (seats: number) => void;
+  selectedSeats: number[];
   carCount: number;
 };
 
-export function CarFilters({ onGearboxChange, selectedGearboxes, onBodyTypeChange, selectedBodyTypes, carCount }: CarFiltersProps) {
+export function CarFilters({ onGearboxChange, selectedGearboxes, onBodyTypeChange, selectedBodyTypes, onSeatsChange, selectedSeats, carCount }: CarFiltersProps) {
   const [priceRange, setPriceRange] = useState([2140000, 3200000]);
   
   const getCarNoun = (count: number) => {
@@ -69,7 +71,7 @@ export function CarFilters({ onGearboxChange, selectedGearboxes, onBodyTypeChang
           </div>
         </div>
 
-        <Accordion type="multiple" defaultValue={["model", "color", "gearbox", "body"]} className="w-full">
+        <Accordion type="multiple" defaultValue={["model", "color", "gearbox", "body", "seats"]} className="w-full">
           <AccordionItem value="model">
             <AccordionTrigger className="text-sm font-semibold">МОДЕЛЬ</AccordionTrigger>
             <AccordionContent>
@@ -157,7 +159,24 @@ export function CarFilters({ onGearboxChange, selectedGearboxes, onBodyTypeChang
            <AccordionItem value="seats">
             <AccordionTrigger className="text-sm font-semibold">КОЛИЧЕСТВО МЕСТ</AccordionTrigger>
             <AccordionContent>
-               <p className="text-sm text-muted-foreground">Опции скоро появятся</p>
+               <div className="space-y-2 pt-2">
+                    <div className="flex items-center gap-2">
+                        <Checkbox 
+                            id="seats-5" 
+                            onCheckedChange={() => onSeatsChange(5)}
+                            checked={selectedSeats.includes(5)}
+                        />
+                        <label htmlFor="seats-5" className="text-sm cursor-pointer">5 мест</label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <Checkbox 
+                            id="seats-7" 
+                            onCheckedChange={() => onSeatsChange(7)}
+                            checked={selectedSeats.includes(7)}
+                        />
+                        <label htmlFor="seats-7" className="text-sm cursor-pointer">7 мест</label>
+                    </div>
+                </div>
             </AccordionContent>
           </AccordionItem>
         </Accordion>
