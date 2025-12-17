@@ -49,10 +49,46 @@
       "imageHint": "white sedan"
     },
     {
+      "id": "tenet-t7-main",
+      "description": "Tenet T7 main view",
+      "imageUrl": "/images/T7main.webp",
+      "imageHint": "white suv main"
+    },
+    {
+      "id": "tenet-t7-profile",
+      "description": "Tenet T7 profile view",
+      "imageUrl": "/images/T7profile.webp",
+      "imageHint": "white suv profile"
+    },
+    {
+      "id": "tenet-t7-rear",
+      "description": "Tenet T7 rear view",
+      "imageUrl": "/images/T7rear.webp",
+      "imageHint": "white suv rear"
+    },
+    {
       "id": "tenet-8",
       "description": "Tenet 8 model car",
       "imageUrl": "/images/T8.webp",
       "imageHint": "black sportscar"
+    },
+    {
+      "id": "tenet-t8-main",
+      "description": "Tenet T8 main view",
+      "imageUrl": "/images/T8main.webp",
+      "imageHint": "black suv main"
+    },
+    {
+      "id": "tenet-t8-profile",
+      "description": "Tenet T8 profile view",
+      "imageUrl": "/images/T8profile.webp",
+      "imageHint": "black suv profile"
+    },
+    {
+      "id": "tenet-t8-rear",
+      "description": "Tenet T8 rear view",
+      "imageUrl": "/images/T8rear.webp",
+      "imageHint": "black suv rear"
     },
     {
       "id": "tenet-9",

@@ -78,13 +78,43 @@ export const allCars: Car[] = [
     price: 2580000,
     monthly: 25663,
     info: "13 автомобилей",
-    images: [PlaceHolderImages.find((img) => img.id === "tenet-7")!],
+    images: [
+      PlaceHolderImages.find((img) => img.id === "tenet-t7-main")!,
+      PlaceHolderImages.find((img) => img.id === "tenet-t7-profile")!,
+      PlaceHolderImages.find((img) => img.id === "tenet-t7-rear")!,
+    ],
     gearbox: "робот",
     bodyType: "внедорожник",
     count: 13,
     seats: 5,
-    specs: [],
-    trims: []
+    specs: [
+      { label: 'Разгон до 100 км/ч', value: '9.8 с' },
+      { label: 'Тип топлива', value: 'Бензин' },
+      { label: 'Расход топлива', value: '8.2 л/100км' },
+      { label: 'Объем двигателя', value: '1.6 л.' },
+      { label: 'Мощность', value: '150 л.с.' },
+      { label: 'Кол-во мест', value: '5 мест' },
+    ],
+    trims: [
+       {
+        name: 'Prestige',
+        price: 2580000,
+        specs: [
+          { label: 'Двигатель', value: '1.6л, 150 л.с.'},
+          { label: 'Трансмиссия', value: 'Робот'},
+          { label: 'Привод', value: 'Передний'},
+        ],
+      },
+      {
+        name: 'Ultimate',
+        price: 2750000,
+        specs: [
+          { label: 'Двигатель', value: '1.6л, 150 л.с.'},
+          { label: 'Трансмиссия', value: 'Робот'},
+          { label: 'Привод', value: 'Полный'},
+        ]
+      }
+    ]
   },
   {
     id: "tenet-t8",
@@ -92,12 +122,42 @@ export const allCars: Car[] = [
     price: 3390000,
     monthly: 38400,
     info: "5 автомобилей",
-    images: [PlaceHolderImages.find((img) => img.id === "tenet-8")!],
+    images: [
+      PlaceHolderImages.find((img) => img.id === "tenet-t8-main")!,
+      PlaceHolderImages.find((img) => img.id === "tenet-t8-profile")!,
+      PlaceHolderImages.find((img) => img.id === "tenet-t8-rear")!,
+    ],
     gearbox: "робот",
     bodyType: "внедорожник",
     count: 5,
     seats: 7,
-    specs: [],
-    trims: []
+    specs: [
+      { label: 'Разгон до 100 км/ч', value: '8.5 с' },
+      { label: 'Тип топлива', value: 'Бензин' },
+      { label: 'Расход топлива', value: '8.5 л/100км' },
+      { label: 'Объем двигателя', value: '2.0 л.' },
+      { label: 'Мощность', value: '197 л.с.' },
+      { label: 'Кол-во мест', value: '7 мест' },
+    ],
+    trims: [
+      {
+        name: 'Dreamline',
+        price: 3390000,
+        specs: [
+          { label: 'Двигатель', value: '2.0л, 197 л.с.'},
+          { label: 'Трансмиссия', value: 'Робот'},
+          { label: 'Привод', value: 'Полный'},
+        ],
+      },
+      {
+        name: 'Ultimate',
+        price: 3590000,
+        specs: [
+          { label: 'Двигатель', value: '2.0л, 197 л.с.'},
+          { label: 'Трансмиссия', value: 'Робот'},
+          { label: 'Привод', value: 'Полный'},
+        ]
+      }
+    ]
   },
 ];
