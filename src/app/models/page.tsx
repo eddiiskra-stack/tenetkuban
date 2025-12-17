@@ -5,47 +5,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { PlaceHolderImages, ImagePlaceholder } from "@/lib/placeholder-images";
-import type { Car } from "@/app/page";
-
-const allCars: Car[] = [
-  {
-    id: "tenet-t4",
-    name: "Tenet T4",
-    price: 1999000,
-    monthly: 29860,
-    info: "3 автомобиля",
-    image: PlaceHolderImages.find((img) => img.id === "tenet-4"),
-    gearbox: "механическая",
-    bodyType: "хечбек",
-    count: 3,
-    seats: 5,
-  },
-  {
-    id: "tenet-t7",
-    name: "Tenet T7",
-    price: 2580000,
-    monthly: 25663,
-    info: "13 автомобилей",
-    image: PlaceHolderImages.find((img) => img.id === "tenet-7"),
-    gearbox: "робот",
-    bodyType: "внедорожник",
-    count: 13,
-    seats: 5,
-  },
-  {
-    id: "tenet-t8",
-    name: "Tenet T8",
-    price: 3390000,
-    monthly: 38400,
-    info: "5 автомобилей",
-    image: PlaceHolderImages.find((img) => img.id === "tenet-8"),
-    gearbox: "робот",
-    bodyType: "внедорожник",
-    count: 5,
-    seats: 7,
-  },
-];
+import { allCars } from "@/lib/cars";
+import type { Car } from "@/lib/cars";
 
 export default function ModelsPage() {
   return (
@@ -64,14 +25,14 @@ export default function ModelsPage() {
               >
                 <CardContent className="p-0 flex flex-col flex-grow">
                   <div className="relative">
-                    {car.image && (
+                    {car.images?.length > 0 && (
                       <Image
-                        src={car.image.imageUrl}
+                        src={car.images[0].imageUrl}
                         alt={car.name}
                         width={500}
                         height={300}
                         className="object-cover w-full aspect-video"
-                        data-ai-hint={car.image.imageHint}
+                        data-ai-hint={car.images[0].imageHint}
                       />
                     )}
                   </div>
@@ -88,7 +49,7 @@ export default function ModelsPage() {
                       </p>
                     </div>
                     <div className="mt-6 flex flex-col sm:flex-row gap-2">
-                       <Link href="/" className="flex-1">
+                       <Link href={`/models/${car.id}`} className="flex-1">
                         <Button className="w-full">Подробнее</Button>
                       </Link>
                       <Button variant="outline" className="flex-1">

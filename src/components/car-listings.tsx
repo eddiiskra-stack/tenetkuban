@@ -14,7 +14,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import type { Car } from "@/app/page";
+import type { Car } from "@/lib/cars";
 
 
 type CarListingsProps = {
@@ -87,14 +87,14 @@ export function CarListings({ cars, totalCarCount }: CarListingsProps) {
           <Card key={car.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
             <CardContent className="p-0">
               <div className="relative">
-                {car.image && (
+                {car.images?.length > 0 && (
                   <Image
-                    src={car.image.imageUrl}
+                    src={car.images[0].imageUrl}
                     alt={car.name}
                     width={500}
                     height={300}
                     className="object-cover w-full aspect-video"
-                    data-ai-hint={car.image.imageHint}
+                    data-ai-hint={car.images[0].imageHint}
                   />
                 )}
                 <Badge variant="default" className="absolute top-2 left-2 bg-red-600 text-white">Выгода</Badge>

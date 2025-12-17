@@ -7,59 +7,8 @@ import { CarFilters } from "@/components/car-filters";
 import { CarListings } from "@/components/car-listings";
 import { HelpForm } from "@/components/help-form";
 import React, { useState, useMemo } from "react";
-import { PlaceHolderImages, ImagePlaceholder } from "@/lib/placeholder-images";
-
-export type Car = {
-  id: string;
-  name: string;
-  price: number;
-  monthly: number;
-  info: string;
-  image: ImagePlaceholder | undefined;
-  gearbox: 'механическая' | 'робот';
-  bodyType: 'хечбек' | 'внедорожник';
-  count: number;
-  seats: number;
-};
-
-const allCars: Car[] = [
-  {
-    id: "tenet-t7",
-    name: "Tenet T7",
-    price: 2580000,
-    monthly: 25663,
-    info: "13 автомобилей",
-    image: PlaceHolderImages.find((img) => img.id === "tenet-7"),
-    gearbox: "робот",
-    bodyType: "внедорожник",
-    count: 13,
-    seats: 5,
-  },
-  {
-    id: "tenet-t4",
-    name: "Tenet T4",
-    price: 1999000,
-    monthly: 29860,
-    info: "3 автомобиля",
-    image: PlaceHolderImages.find((img) => img.id === "tenet-4"),
-    gearbox: "механическая",
-    bodyType: "хечбек",
-    count: 3,
-    seats: 5,
-  },
-  {
-    id: "tenet-t8",
-    name: "Tenet T8",
-    price: 3390000,
-    monthly: 38400,
-    info: "5 автомобилей",
-    image: PlaceHolderImages.find((img) => img.id === "tenet-8"),
-    gearbox: "робот",
-    bodyType: "внедорожник",
-    count: 5,
-    seats: 7,
-  }
-];
+import { allCars } from "@/lib/cars";
+import type { Car } from "@/lib/cars";
 
 
 export default function Home() {

@@ -25,6 +25,24 @@
       "imageHint": "red suv"
     },
     {
+      "id": "tenet-t4-front",
+      "description": "Tenet T4 front side view",
+      "imageUrl": "/images/T4frontside.webp",
+      "imageHint": "red suv front"
+    },
+    {
+      "id": "tenet-t4-profile",
+      "description": "Tenet T4 profile view",
+      "imageUrl": "/images/T4profile.webp",
+      "imageHint": "red suv profile"
+    },
+    {
+      "id": "tenet-t4-back",
+      "description": "Tenet T4 back side view",
+      "imageUrl": "/images/T4backside.webp",
+      "imageHint": "red suv back"
+    },
+    {
       "id": "tenet-7",
       "description": "Tenet 7 model car",
       "imageUrl": "/images/T7.webp",
