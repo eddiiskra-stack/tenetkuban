@@ -6,50 +6,81 @@ import { SiteFooter } from "@/components/site-footer";
 import { CarFilters } from "@/components/car-filters";
 import { CarListings } from "@/components/car-listings";
 import { HelpForm } from "@/components/help-form";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, Suspense } from "react";
 import { allCars } from "@/lib/cars";
-import type { Car } from "@/lib/cars";
-import { useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
-
-export default function Home() {
-  const [gearboxFilter, setGearboxFilter] = useState<string[]>([]);
-  const [bodyTypeFilter, setBodyTypeFilter] = useState<string[]>([]);
-  const [seatsFilter, setSeatsFilter] = useState<number[]>([]);
+function StockPageContent() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
   const minPrice = useMemo(() => Math.min(...allCars.map(car => car.price)), []);
   const maxPrice = useMemo(() => Math.max(...allCars.map(car => car.price)), []);
 
+  const [gearboxFilter, setGearboxFilter] = useState<string[]>([]);
+  const [bodyTypeFilter, setBodyTypeFilter] = useState<string[]>([]);
+  const [seatsFilter, setSeatsFilter] = useState<number[]>([]);
   const [priceRange, setPriceRange] = useState<[number, number]>([minPrice, maxPrice]);
-  const router = useRouter();
 
+  useEffect(() => {
+    const gearbox = searchParams.get('gearbox');
+    const body = searchParams.get('body');
+    const seats = searchParams.get('seats');
+    const price = searchParams.get('price');
+    
+    if (gearbox) setGearboxFilter(gearbox.split(','));
+    if (body) setBodyTypeFilter(body.split(','));
+    if (seats) setSeatsFilter(seats.split(',').map(Number));
+    if (price) {
+      const [min, max] = price.split(',').map(Number);
+      if (!isNaN(min) && !isNaN(max)) {
+        setPriceRange([min, max]);
+      }
+    }
+  }, [searchParams]);
+
+  const updateURLParams = (newFilters: { [key: string]: any }) => {
+    const params = new URLSearchParams(searchParams.toString());
+    Object.keys(newFilters).forEach(key => {
+      const value = newFilters[key];
+      if (Array.isArray(value) && value.length > 0) {
+        params.set(key, value.join(','));
+      } else if (typeof value === 'string' && value) {
+        params.set(key, value);
+      } else if (Array.isArray(value) && value.length === 0) {
+        params.delete(key);
+      }
+    });
+    router.replace(`/stock?${params.toString()}`);
+  };
 
   const handleGearboxChange = (gearbox: string) => {
-    setGearboxFilter(prev => 
-      prev.includes(gearbox) 
-        ? prev.filter(g => g !== gearbox) 
-        : [...prev, gearbox]
-    );
+    const newGearboxFilter = gearboxFilter.includes(gearbox)
+      ? gearboxFilter.filter(g => g !== gearbox)
+      : [...gearboxFilter, gearbox];
+    setGearboxFilter(newGearboxFilter);
+    updateURLParams({ gearbox: newGearboxFilter });
   };
   
   const handleBodyTypeChange = (bodyType: string) => {
-    setBodyTypeFilter(prev =>
-      prev.includes(bodyType)
-        ? prev.filter(b => b !== bodyType)
-        : [...prev, bodyType]
-    );
+    const newBodyTypeFilter = bodyTypeFilter.includes(bodyType)
+      ? bodyTypeFilter.filter(b => b !== bodyType)
+      : [...bodyTypeFilter, bodyType];
+    setBodyTypeFilter(newBodyTypeFilter);
+    updateURLParams({ body: newBodyTypeFilter });
   };
 
   const handleSeatsChange = (seats: number) => {
-    setSeatsFilter(prev =>
-      prev.includes(seats)
-        ? prev.filter(s => s !== seats)
-        : [...prev, seats]
-    );
+    const newSeatsFilter = seatsFilter.includes(seats)
+      ? seatsFilter.filter(s => s !== seats)
+      : [...seatsFilter, seats];
+    setSeatsFilter(newSeatsFilter);
+    updateURLParams({ seats: newSeatsFilter });
   };
 
   const handlePriceChange = (newRange: [number, number]) => {
     setPriceRange(newRange);
+    updateURLParams({ price: newRange.join(',') });
   };
 
   const filteredCars = useMemo(() => {
@@ -76,26 +107,11 @@ export default function Home() {
     return filteredCars.reduce((total, car) => total + car.count, 0);
   }, [filteredCars]);
 
-  const handleShowClick = () => {
-    const params = new URLSearchParams();
-    if (gearboxFilter.length > 0) params.set('gearbox', gearboxFilter.join(','));
-    if (bodyTypeFilter.length > 0) params.set('body', bodyTypeFilter.join(','));
-    if (seatsFilter.length > 0) params.set('seats', seatsFilter.join(','));
-    params.set('price', `${priceRange[0]},${priceRange[1]}`);
-    
-    router.push(`/stock?${params.toString()}`);
-  };
-
-
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
       <main className="flex-1 w-full bg-background">
         <div className="container mx-auto px-4 md:px-6 py-8">
-            <h1 className="text-4xl font-bold text-center mb-4 font-headline">Автомобили TENET в наличии</h1>
-            <p className="text-center text-muted-foreground mb-8">
-                Выберите автомобиль своей мечты
-            </p>
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             <aside className="lg:col-span-1">
               <CarFilters 
@@ -110,11 +126,11 @@ export default function Home() {
                 onSeatsChange={handleSeatsChange}
                 selectedSeats={seatsFilter}
                 carCount={totalCarCount}
-                onShowClick={handleShowClick}
+                showButton={false}
               />
             </aside>
             <div className="lg:col-span-3 space-y-12">
-              <CarListings cars={allCars} totalCarCount={allCars.reduce((total, car) => total + car.count, 0)} />
+              <CarListings cars={filteredCars} totalCarCount={totalCarCount} />
               <HelpForm />
             </div>
           </div>
@@ -123,4 +139,13 @@ export default function Home() {
       <SiteFooter />
     </div>
   );
+}
+
+
+export default function StockPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <StockPageContent />
+    </Suspense>
+  )
 }

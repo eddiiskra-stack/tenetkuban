@@ -26,6 +26,8 @@ type CarFiltersProps = {
   onSeatsChange: (seats: number) => void;
   selectedSeats: number[];
   carCount: number;
+  onShowClick?: () => void;
+  showButton?: boolean;
 };
 
 export function CarFilters({ 
@@ -39,7 +41,9 @@ export function CarFilters({
   selectedBodyTypes, 
   onSeatsChange, 
   selectedSeats, 
-  carCount 
+  carCount,
+  onShowClick,
+  showButton = true,
 }: CarFiltersProps) {
   
   const getCarNoun = (count: number) => {
@@ -198,7 +202,12 @@ export function CarFilters({
       </div>
       <div className="mt-8 border-t pt-6">
         <p className="text-sm text-muted-foreground mb-4">Подходит {carCount} {getCarNoun(carCount)}</p>
-        <Button variant="outline" className="w-full">
+        {showButton && onShowClick && (
+          <Button onClick={onShowClick} className="w-full">
+            Показать
+          </Button>
+        )}
+        <Button variant="outline" className="w-full mt-2">
           Очистить фильтры
         </Button>
       </div>

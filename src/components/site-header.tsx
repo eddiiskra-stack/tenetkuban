@@ -12,10 +12,10 @@ export function SiteHeader() {
           </Link>
           <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
             <Link
-              href="#calculator"
+              href="/stock"
               className="transition-colors hover:text-foreground/80 text-foreground/60"
             >
-              Калькулятор
+              в наличии
             </Link>
             <Link
               href="/models"
