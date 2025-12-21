@@ -15,6 +15,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { Car } from "@/lib/cars";
+import Link from "next/link";
 
 
 type CarListingsProps = {
@@ -91,35 +92,40 @@ export function CarListings({ cars, totalCarCount, isHomePage = false }: CarList
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {cars.map((car) => (
-          <Card key={car.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-            <CardContent className="p-0">
-              <div className="relative">
-                {car.images?.length > 0 && (
-                  <Image
-                    src={car.images[0].imageUrl}
-                    alt={car.name}
-                    width={500}
-                    height={300}
-                    className="object-cover w-full aspect-video"
-                    data-ai-hint={car.images[0].imageHint}
-                  />
-                )}
-                <Badge variant="default" className="absolute top-2 left-2 bg-red-600 text-white">Выгода</Badge>
-              </div>
-              <div className="p-4">
-                <p className="text-sm text-muted-foreground">{car.count} автомобилей - {car.info}</p>
-                <h3 className="text-lg font-bold font-headline mt-1">{car.name}</h3>
-                <p className="text-xl font-bold text-primary mt-2">
-                  от {car.price.toLocaleString("ru-RU")}* ₽
-                </p>
-                <p className="text-sm text-green-600 font-semibold mt-1">
-                  от {car.monthly.toLocaleString("ru-RU")} ₽ в месяц
-                </p>
-              </div>
-            </CardContent>
-          </Card>
+          <Link href={`/models/${car.id}`} key={car.id} className="block">
+            <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
+              <CardContent className="p-0 flex flex-col h-full">
+                <div className="relative">
+                  {car.images?.length > 0 && (
+                    <Image
+                      src={car.images[0].imageUrl}
+                      alt={car.name}
+                      width={500}
+                      height={300}
+                      className="object-cover w-full aspect-video"
+                      data-ai-hint={car.images[0].imageHint}
+                    />
+                  )}
+                  <Badge variant="default" className="absolute top-2 left-2 bg-red-600 text-white">Выгода</Badge>
+                </div>
+                <div className="p-4 flex flex-col flex-grow">
+                  <p className="text-sm text-muted-foreground">{car.count} автомобилей - {car.info}</p>
+                  <h3 className="text-lg font-bold font-headline mt-1">{car.name}</h3>
+                  <div className="flex-grow mt-2">
+                    <p className="text-xl font-bold text-primary">
+                      от {car.price.toLocaleString("ru-RU")}* ₽
+                    </p>
+                    <p className="text-sm text-green-600 font-semibold mt-1">
+                      от {car.monthly.toLocaleString("ru-RU")} ₽ в месяц
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
         ))}
       </div>
     </section>
   );
 }
+
