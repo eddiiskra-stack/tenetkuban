@@ -20,7 +20,18 @@ import {
 } from "@/components/ui/select";
 import { X } from "lucide-react";
 
-const colors = ["#ffffff", "#000000", "#a0aec0", "#48bb78", "#4299e1"];
+const colors = [
+    { name: "Благородный серый", hex: "#A9A9A9" },
+    { name: "Глубокий черный", hex: "#000000" },
+    { name: "Изумрудный зеленый", hex: "#008000" },
+    { name: "Искрящийся белый", hex: "#F5F5DC" },
+    { name: "Лазурный синий", hex: "#007FFF" },
+    { name: "Морской синий", hex: "#000080" },
+    { name: "Огненно-красный", hex: "#FF4500" },
+    { name: "Серебристый", hex: "#C0C0C0" },
+    { name: "Технологичный серый", hex: "#808080" },
+];
+
 
 type CarFiltersProps = {
   minPrice: number;
@@ -173,9 +184,16 @@ export function CarFilters({
           <AccordionItem value="color">
             <AccordionTrigger className="text-sm font-semibold">ЦВЕТ</AccordionTrigger>
             <AccordionContent>
-                <div className="flex items-center space-x-2 pt-2">
-                    {colors.map((color, index) => (
-                        <button key={index} className="w-6 h-6 rounded-full border-2 border-transparent focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2" style={{ backgroundColor: color }} aria-label={`Color ${color}`}></button>
+                <div className="space-y-2 pt-2">
+                    {colors.map((color) => (
+                         <div key={color.name} className="flex items-center gap-2">
+                            <button 
+                                className="w-6 h-6 rounded-full border-2 border-muted"
+                                style={{ backgroundColor: color.hex }}
+                                aria-label={color.name}
+                            />
+                            <label className="text-sm cursor-pointer">{color.name}</label>
+                        </div>
                     ))}
                 </div>
             </AccordionContent>
@@ -273,3 +291,5 @@ export function CarFilters({
     </div>
   );
 }
+
+    
