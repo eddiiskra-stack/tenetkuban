@@ -486,7 +486,7 @@ export const allCars: Car[] = [
     color: "Искрящийся белый",
     vin: "EDEEB11BSE***68"
   },
-    {
+  {
     id: "tenet-t4-mt-line-white-optima-2024",
     name: "Tenet T4",
     price: 1999000,
@@ -513,6 +513,34 @@ export const allCars: Car[] = [
     dealer: "ОПТИМА ОНЛАЙН, Краснодар",
     color: "Искрящийся белый",
     vin: "EDEEB11BSE***68"
+  },
+  {
+    id: "tenet-t4-mt-line-white-vin70",
+    name: "Tenet T4",
+    price: 1999000,
+    monthly: 29860,
+    info: "1 автомобиль",
+    images: [
+        PlaceHolderImages.find((img) => img.id === "tenet-4")!,
+        PlaceHolderImages.find((img) => img.id === "tenet-t4-front")!,
+        PlaceHolderImages.find((img) => img.id === "tenet-t4-profile")!,
+        PlaceHolderImages.find((img) => img.id === "tenet-t4-back")!,
+    ],
+    gearbox: "механическая",
+    bodyType: "внедорожник",
+    count: 1,
+    seats: 5,
+    specs: [],
+    trims: [],
+    trimName: "MT Line",
+    year: 2024,
+    engineVolume: "1.5",
+    transmission: "Механическая",
+    drivetrain: "Передний привод",
+    status: "У дилера",
+    dealer: "ОПТИМА ОНЛАЙН, Краснодар",
+    color: "Искрящийся белый",
+    vin: "EDEEB11BSE***70"
   },
   {
     id: "tenet-t7",
