@@ -30,12 +30,8 @@ jobs:
 
       - name: Install YC CLI
         run: |
-          export PATH="/usr/local/bin:$PATH"
           curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash -s -- -i /usr/local/bin -n
-          yc config profile create default
-          yc config set token ${{ secrets.YC_OAUTH_TOKEN }}
-          yc config set cloud-id ${{ secrets.YC_CLOUD_ID }}
-          yc config set folder-id ${{ secrets.YC_FOLDER_ID }}
+          echo "/usr/local/bin" >> $GITHUB_PATH
 
       - name: Deploy to Yandex Cloud
         env:
@@ -43,6 +39,11 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_KEY }}
           AWS_DEFAULT_REGION: ru-central1
         run: |
+          yc config profile create default
+          yc config set token ${{ secrets.YC_OAUTH_TOKEN }}
+          yc config set cloud-id ${{ secrets.YC_CLOUD_ID }}
+          yc config set folder-id ${{ secrets.YC_FOLDER_ID }}
+          
           echo "Syncing assets to Yandex Cloud Storage with long cache..."
           aws s3 sync ./out s3://${{ secrets.YC_BUCKET_NAME }} \
             --endpoint-url=https://storage.yandexcloud.net \
@@ -63,4 +64,3 @@ jobs:
       - name: Purge CDN Cache
         run: |
           yc cdn resource purge-cache --resource-id bc8r3evbb6lrthbj7azw --all
-
