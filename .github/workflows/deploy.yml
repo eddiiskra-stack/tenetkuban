@@ -34,36 +34,8 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_KEY }}
           AWS_DEFAULT_REGION: ru-central1
         run: |
-          echo "Installing Yandex Cloud CLI..."
-          curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash -s -- -i /usr/local/bin -n
-
-          echo "Configuring Yandex Cloud CLI..."
-          /usr/local/bin/yc config profile create default
-          /usr/local/bin/yc config set token ${{ secrets.YC_OAUTH_TOKEN }}
-          /usr/local/bin/yc config set cloud-id ${{ secrets.YC_CLOUD_ID }}
-          /usr/local/bin/yc config set folder-id ${{ secrets.YC_FOLDER_ID }}
-          
-          echo "Syncing assets to Yandex Cloud Storage with long cache..."
           aws s3 sync ./out s3://${{ secrets.YC_BUCKET_NAME }} \
             --endpoint-url=https://storage.yandexcloud.net \
             --delete \
             --no-progress \
-            --acl public-read \
-            --exclude "index.html" \
-            --cache-control "public, max-age=31536000, immutable"
-          
-          echo "Syncing index.html with no cache..."
-          aws s3 cp ./out/index.html s3://${{ secrets.YC_BUCKET_NAME }}/index.html \
-            --endpoint-url=https://storage.yandexcloud.net \
-            --acl public-read \
-            --cache-control "no-cache, no-store, must-revalidate"
-
-          echo "Deployment successful."
-
-      - name: Purge CDN Cache
-        run: |
-          /usr/local/bin/yc cdn resource purge-cache --resource-id bc8r3evbb6lrthbj7azw --all
-        env:
-          YC_TOKEN: ${{ secrets.YC_OAUTH_TOKEN }}
-          YC_CLOUD_ID: ${{ secrets.YC_CLOUD_ID }}
-          YC_FOLDER_ID: ${{ secrets.YC_FOLDER_ID }}
+            --acl public-read
