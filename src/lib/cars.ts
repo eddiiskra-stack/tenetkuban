@@ -42,12 +42,13 @@ export const allCars: Car[] = [
     monthly: 29860,
     info: "3 автомобиля",
     images: [
+        PlaceHolderImages.find((img) => img.id === "tenet-4")!,
         PlaceHolderImages.find((img) => img.id === "tenet-t4-front")!,
         PlaceHolderImages.find((img) => img.id === "tenet-t4-profile")!,
         PlaceHolderImages.find((img) => img.id === "tenet-t4-back")!,
     ],
-    gearbox: "механическая",
-    bodyType: "хечбек",
+    gearbox: "робот",
+    bodyType: "внедорожник",
     count: 3,
     seats: 5,
     specs: [
@@ -91,6 +92,7 @@ export const allCars: Car[] = [
     monthly: 25663,
     info: "13 автомобилей",
     images: [
+      PlaceHolderImages.find((img) => img.id === "tenet-7")!,
       PlaceHolderImages.find((img) => img.id === "tenet-t7-main")!,
       PlaceHolderImages.find((img) => img.id === "tenet-t7-profile")!,
       PlaceHolderImages.find((img) => img.id === "tenet-t7-rear")!,
@@ -140,6 +142,7 @@ export const allCars: Car[] = [
     monthly: 38400,
     info: "5 автомобилей",
     images: [
+      PlaceHolderImages.find((img) => img.id === "tenet-8")!,
       PlaceHolderImages.find((img) => img.id === "tenet-t8-main")!,
       PlaceHolderImages.find((img) => img.id === "tenet-t8-profile")!,
       PlaceHolderImages.find((img) => img.id === "tenet-t8-rear")!,
