@@ -116,7 +116,7 @@ export default function Home() {
               />
             </aside>
             <div className="lg:col-span-3 space-y-6">
-              <CarListings cars={allCars.slice(0, 4)} totalCarCount={allCars.reduce((total, car) => total + car.count, 0)} isHomePage />
+              <CarListings cars={filteredCars.slice(0, 4)} totalCarCount={totalCarCount} isHomePage />
               <div className="flex justify-center">
                 <Link href="/stock" passHref>
                   <Button variant="outline">Смотреть все автомобили</Button>
