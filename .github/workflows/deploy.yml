@@ -28,17 +28,17 @@ jobs:
         env:
           NODE_ENV: production
 
-      - name: Install YC CLI
-        run: |
-          curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash -s -- -i /usr/local/bin -n
-          echo "/usr/local/bin" >> $GITHUB_PATH
-
       - name: Deploy to Yandex Cloud
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.YC_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_KEY }}
           AWS_DEFAULT_REGION: ru-central1
         run: |
+          echo "Installing Yandex Cloud CLI..."
+          curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash -s -- -i /usr/local/bin -n
+          export PATH="/usr/local/bin:$PATH"
+
+          echo "Configuring Yandex Cloud CLI..."
           yc config profile create default
           yc config set token ${{ secrets.YC_OAUTH_TOKEN }}
           yc config set cloud-id ${{ secrets.YC_CLOUD_ID }}
@@ -63,4 +63,5 @@ jobs:
 
       - name: Purge CDN Cache
         run: |
+          export PATH="/usr/local/bin:$PATH"
           yc cdn resource purge-cache --resource-id bc8r3evbb6lrthbj7azw --all
