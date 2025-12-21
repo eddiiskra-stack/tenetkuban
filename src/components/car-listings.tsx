@@ -92,7 +92,7 @@ export function CarListings({ cars, totalCarCount, isHomePage = false }: CarList
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {cars.map((car) => (
-          <Link href={`/models/${car.id}`} key={car.id} className="block">
+          <Link href="/stock" key={car.id} className="block">
             <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
               <CardContent className="p-0 flex flex-col h-full">
                 <div className="relative">
@@ -128,4 +128,3 @@ export function CarListings({ cars, totalCarCount, isHomePage = false }: CarList
     </section>
   );
 }
-

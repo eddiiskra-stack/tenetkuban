@@ -19,7 +19,7 @@ export default function ModelsPage() {
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {allCars.map((car) => (
-              <Link href={`/models/${car.id}`} key={car.id} className="block">
+              <Link href="/stock" key={car.id} className="block">
                 <Card
                   className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full"
                 >
@@ -49,7 +49,9 @@ export default function ModelsPage() {
                         </p>
                       </div>
                       <div className="mt-6 flex flex-col sm:flex-row gap-2">
-                          <Button className="w-full">Подробнее</Button>
+                          <Link href={`/models/${car.id}`} passHref>
+                            <Button className="w-full">Подробнее</Button>
+                          </Link>
                           <Button variant="outline" className="w-full as-link">
                             <Link href="/#help-form" className="w-full h-full flex items-center justify-center">
                               Тест-драйв
@@ -68,4 +70,3 @@ export default function ModelsPage() {
     </div>
   );
 }
-
