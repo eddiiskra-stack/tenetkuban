@@ -39,6 +39,8 @@ export type Car = {
   drivetrain?: 'Передний привод';
   status?: 'У дилера' | 'В пути' | 'Центральный склад';
   dealer?: string;
+  color?: string;
+  vin?: string;
 };
 
 export const allCars: Car[] = [
@@ -145,7 +147,9 @@ export const allCars: Car[] = [
     transmission: "Механическая",
     drivetrain: "Передний привод",
     status: "У дилера",
-    dealer: "ОПТИМА ОНЛАЙН, Краснодар"
+    dealer: "ОПТИМА ОНЛАЙН, Краснодар",
+    color: "Искрящийся белый",
+    vin: "EDEEB11B*SE****68"
   },
   {
     id: "tenet-t7",
