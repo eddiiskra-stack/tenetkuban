@@ -20,9 +20,10 @@ import type { Car } from "@/lib/cars";
 type CarListingsProps = {
   cars: Car[];
   totalCarCount: number;
+  isHomePage?: boolean;
 };
 
-export function CarListings({ cars, totalCarCount }: CarListingsProps) {
+export function CarListings({ cars, totalCarCount, isHomePage = false }: CarListingsProps) {
 
   const getCarNoun = (count: number) => {
     const lastDigit = count % 10;
@@ -42,45 +43,51 @@ export function CarListings({ cars, totalCarCount }: CarListingsProps) {
 
   return (
     <section>
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
-        <h1 className="text-2xl md:text-3xl font-bold font-headline mb-4 md:mb-0">
-          {totalCarCount > 0 ? `${totalCarCount} ${getCarNoun(totalCarCount)} TENET` : 'НОВЫЕ АВТОМОБИЛИ TENET'}
-        </h1>
-        <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon">
-            <Heart className="h-5 w-5" />
-          </Button>
-          <Button variant="ghost" size="icon">
-            <ListFilter className="h-5 w-5" />
-          </Button>
-           <Button variant="ghost" size="icon">
-            <Menu className="h-5 w-5" />
-          </Button>
+      {!isHomePage && (
+         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+            <h1 className="text-2xl md:text-3xl font-bold font-headline mb-4 md:mb-0">
+                {totalCarCount > 0 ? `${totalCarCount} ${getCarNoun(totalCarCount)} TENET` : 'НОВЫЕ АВТОМОБИЛИ TENET'}
+            </h1>
+            <div className="flex items-center gap-4">
+            <Button variant="ghost" size="icon">
+                <Heart className="h-5 w-5" />
+            </Button>
+            <Button variant="ghost" size="icon">
+                <ListFilter className="h-5 w-5" />
+            </Button>
+            <Button variant="ghost" size="icon">
+                <Menu className="h-5 w-5" />
+            </Button>
+            </div>
         </div>
-      </div>
+      )}
 
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
-        <div className="flex items-center space-x-2">
-          <Checkbox id="with-discount" />
-          <label
-            htmlFor="with-discount"
-            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-          >
-            Со скидкой
-          </label>
+
+      {!isHomePage && (
+         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+            <div className="flex items-center space-x-2">
+            <Checkbox id="with-discount" />
+            <label
+                htmlFor="with-discount"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+                Со скидкой
+            </label>
+            </div>
+            <div className="w-full md:w-auto mt-4 md:mt-0">
+            <Select defaultValue="price-asc">
+                <SelectTrigger className="w-full md:w-[180px]">
+                <SelectValue placeholder="Сортировка" />
+                </SelectTrigger>
+                <SelectContent>
+                <SelectItem value="price-asc">По возрастанию цены</SelectItem>
+                <SelectItem value="price-desc">По убыванию цены</SelectItem>
+                </SelectContent>
+            </Select>
+            </div>
         </div>
-        <div className="w-full md:w-auto mt-4 md:mt-0">
-          <Select defaultValue="price-asc">
-            <SelectTrigger className="w-full md:w-[180px]">
-              <SelectValue placeholder="Сортировка" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="price-asc">По возрастанию цены</SelectItem>
-              <SelectItem value="price-desc">По убыванию цены</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
+      )}
+      
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {cars.map((car) => (

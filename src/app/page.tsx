@@ -10,6 +10,8 @@ import React, { useState, useMemo } from "react";
 import { allCars } from "@/lib/cars";
 import type { Car } from "@/lib/cars";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 
 export default function Home() {
@@ -113,8 +115,13 @@ export default function Home() {
                 onShowClick={handleShowClick}
               />
             </aside>
-            <div className="lg:col-span-3 space-y-12">
-              <CarListings cars={allCars} totalCarCount={allCars.reduce((total, car) => total + car.count, 0)} />
+            <div className="lg:col-span-3 space-y-6">
+              <CarListings cars={allCars.slice(0, 4)} totalCarCount={allCars.reduce((total, car) => total + car.count, 0)} isHomePage />
+              <div className="flex justify-center">
+                <Link href="/stock" passHref>
+                  <Button variant="outline">Смотреть все автомобили</Button>
+                </Link>
+              </div>
               <HelpForm />
             </div>
           </div>
