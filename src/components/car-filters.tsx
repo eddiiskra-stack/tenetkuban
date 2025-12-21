@@ -11,6 +11,14 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { X } from "lucide-react";
 
 const colors = ["#ffffff", "#000000", "#a0aec0", "#48bb78", "#4299e1"];
 
@@ -66,31 +74,74 @@ export function CarFilters({
   return (
     <div className="p-6 bg-card rounded-lg shadow-sm border">
       <div className="space-y-6">
-        <div>
-          <h3 className="text-sm font-semibold mb-2">ЦЕНА, Р</h3>
-          <Slider
-            min={minPrice}
-            max={maxPrice}
-            step={10000}
-            value={priceRange}
-            onValueChange={(value) => onPriceChange(value as [number, number])}
-            className="mb-4"
-          />
-          <div className="flex justify-between items-center text-sm">
-            <Input
-              value={`от ${priceRange[0].toLocaleString("ru-RU")}`}
-              readOnly
-              className="w-1/2"
-            />
-            <Input
-              value={`до ${priceRange[1].toLocaleString("ru-RU")}`}
-              readOnly
-              className="w-1/2 ml-2"
-            />
-          </div>
-        </div>
-
-        <Accordion type="multiple" defaultValue={["model", "color", "gearbox", "body", "seats"]} className="w-full">
+        <Accordion type="multiple" defaultValue={["location", "model", "price", "color", "gearbox", "body", "seats"]} className="w-full">
+          <AccordionItem value="location">
+            <AccordionTrigger className="text-sm font-semibold">ГДЕ КУПИТЬ</AccordionTrigger>
+            <AccordionContent>
+              <div className="space-y-4 pt-2">
+                <div>
+                  <label className="text-xs font-semibold text-muted-foreground">ГОРОД</label>
+                   <div className="flex items-center gap-2 mt-1">
+                      <div className="flex items-center gap-1.5 bg-muted text-muted-foreground px-2 py-1 rounded-full">
+                          <span>Краснодар</span>
+                          <X className="w-3.5 h-3.5 cursor-pointer"/>
+                      </div>
+                   </div>
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-muted-foreground">ДИЛЕРСКИЙ ЦЕНТР</label>
+                  <Select>
+                      <SelectTrigger className="w-full mt-1">
+                          <SelectValue placeholder="Выберите" />
+                      </SelectTrigger>
+                      <SelectContent>
+                          <SelectItem value="leon-avto">ЛЕОН-АВТО ОНЛАЙН</SelectItem>
+                          <SelectItem value="optima-online">ОПТИМА ОНЛАЙН</SelectItem>
+                      </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2 pt-2">
+                    <div className="flex items-center gap-2">
+                        <Checkbox id="status-in-transit" />
+                        <label htmlFor="status-in-transit" className="text-sm cursor-pointer">В пути</label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <Checkbox id="status-at-dealer" />
+                        <label htmlFor="status-at-dealer" className="text-sm cursor-pointer">У дилера</label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <Checkbox id="status-central-stock" />
+                        <label htmlFor="status-central-stock" className="text-sm cursor-pointer">Центральный склад</label>
+                    </div>
+                </div>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="price">
+            <AccordionTrigger className="text-sm font-semibold">ЦЕНА, Р</AccordionTrigger>
+            <AccordionContent>
+                <Slider
+                    min={minPrice}
+                    max={maxPrice}
+                    step={10000}
+                    value={priceRange}
+                    onValueChange={(value) => onPriceChange(value as [number, number])}
+                    className="mb-4 pt-2"
+                />
+                <div className="flex justify-between items-center text-sm">
+                    <Input
+                    value={`от ${priceRange[0].toLocaleString("ru-RU")}`}
+                    readOnly
+                    className="w-1/2"
+                    />
+                    <Input
+                    value={`до ${priceRange[1].toLocaleString("ru-RU")}`}
+                    readOnly
+                    className="w-1/2 ml-2"
+                    />
+                </div>
+            </AccordionContent>
+          </AccordionItem>
           <AccordionItem value="model">
             <AccordionTrigger className="text-sm font-semibold">МОДЕЛЬ</AccordionTrigger>
             <AccordionContent>

@@ -19,7 +19,7 @@ export default function ModelsPage() {
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {allCars.map((car) => (
-              <Link href="/stock" key={car.id} className="block">
+              <Link href={`/models/${car.id}`} key={car.id} className="block">
                 <Card
                   className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full"
                 >

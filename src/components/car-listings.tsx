@@ -2,7 +2,7 @@
 "use client";
 
 import Image from "next/image";
-import { Heart, ListFilter, Menu } from "lucide-react";
+import { Heart, ListFilter, Menu, Gauge, GitCommitHorizontal, Cog, MapPin } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -41,6 +41,13 @@ export function CarListings({ cars, totalCarCount, isHomePage = false }: CarList
     }
     return 'НОВЫХ АВТОМОБИЛЕЙ';
   };
+
+  const carSpecIcons: { [key: string]: React.ReactNode } = {
+    'engine_volume': <Cog className="w-4 h-4 text-muted-foreground" />,
+    'transmission': <GitCommitHorizontal className="w-4 h-4 text-muted-foreground" />,
+    'drivetrain': <Gauge className="w-4 h-4 text-muted-foreground" />,
+  };
+
 
   return (
     <section>
@@ -106,18 +113,42 @@ export function CarListings({ cars, totalCarCount, isHomePage = false }: CarList
                       data-ai-hint={car.images[0].imageHint}
                     />
                   )}
-                  <Badge variant="default" className="absolute top-2 left-2 bg-red-600 text-white">Выгода</Badge>
+                   {car.status && <Badge variant={car.status === "У дилера" ? "default" : "secondary"} className="absolute top-2 left-2">{car.status}</Badge>}
                 </div>
                 <div className="p-4 flex flex-col flex-grow">
-                  <p className="text-sm text-muted-foreground">{car.count} автомобилей - {car.info}</p>
-                  <h3 className="text-lg font-bold font-headline mt-1">{car.name}</h3>
-                  <div className="flex-grow mt-2">
-                    <p className="text-xl font-bold text-primary">
-                      от {car.price.toLocaleString("ru-RU")}* ₽
+                  <h3 className="text-lg font-bold font-headline">{car.name} {car.trimName}, {car.year}</h3>
+
+                  <div className="flex items-center gap-4 text-sm text-muted-foreground mt-2">
+                      <div className="flex items-center gap-1.5">
+                          {carSpecIcons.engine_volume}
+                          <span>{car.engineVolume}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                          {carSpecIcons.transmission}
+                          <span>{car.transmission}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                          {carSpecIcons.drivetrain}
+                          <span>{car.drivetrain}</span>
+                      </div>
+                  </div>
+                  
+                  <div className="flex-grow mt-4">
+                    <p className="text-xl font-bold">
+                      {car.price.toLocaleString("ru-RU")} ₽
                     </p>
-                    <p className="text-sm text-green-600 font-semibold mt-1">
-                      от {car.monthly.toLocaleString("ru-RU")} ₽ в месяц
-                    </p>
+                  </div>
+
+                  {car.dealer && (
+                    <div className="mt-4 flex items-center text-sm text-muted-foreground">
+                        <MapPin className="w-4 h-4 mr-1.5"/>
+                        <span>{car.dealer}</span>
+                    </div>
+                  )}
+
+                  <div className="flex items-center justify-end gap-2 mt-2">
+                    <Button variant="ghost" size="icon"><Heart className="w-5 h-5"/></Button>
+                    <Button variant="ghost" size="icon"><ListFilter className="w-5 h-5"/></Button>
                   </div>
                 </div>
               </CardContent>
