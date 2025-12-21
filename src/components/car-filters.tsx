@@ -74,7 +74,7 @@ export function CarFilters({
   return (
     <div className="p-6 bg-card rounded-lg shadow-sm border">
       <div className="space-y-6">
-        <Accordion type="multiple" defaultValue={["location", "model", "price", "color", "gearbox", "body", "seats"]} className="w-full">
+        <Accordion type="multiple" defaultValue={["location", "model", "price", "color", "gearbox", "body", "seats", "transmission"]} className="w-full">
           <AccordionItem value="location">
             <AccordionTrigger className="text-sm font-semibold">ГДЕ КУПИТЬ</AccordionTrigger>
             <AccordionContent>
@@ -199,6 +199,14 @@ export function CarFilters({
                     checked={selectedGearboxes.includes('робот')}
                   />
                   <label htmlFor="gearbox-robot" className="text-sm cursor-pointer">робот</label>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Checkbox 
+                    id="gearbox-variator" 
+                    onCheckedChange={() => onGearboxChange('вариатор')}
+                    checked={selectedGearboxes.includes('вариатор')}
+                  />
+                  <label htmlFor="gearbox-variator" className="text-sm cursor-pointer">вариатор</label>
                 </div>
               </div>
             </AccordionContent>

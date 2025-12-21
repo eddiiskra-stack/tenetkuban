@@ -25,7 +25,7 @@ export type Car = {
   monthly: number;
   info: string;
   images: ImagePlaceholder[];
-  gearbox: 'механическая' | 'робот' | 'автомат';
+  gearbox: 'механическая' | 'робот' | 'автомат' | 'вариатор';
   bodyType: 'хечбек' | 'внедорожник' | 'седан';
   count: number;
   seats: number;
@@ -35,8 +35,8 @@ export type Car = {
   trimName?: string;
   year?: number;
   engineVolume?: string;
-  transmission?: 'Механическая' | 'Робот';
-  drivetrain?: 'Передний привод';
+  transmission?: 'Механическая' | 'Робот' | 'Вариатор';
+  drivetrain?: 'Передний привод' | 'Полный привод';
   status?: 'У дилера' | 'В пути' | 'Центральный склад';
   dealer?: string;
   color?: string;
@@ -200,6 +200,56 @@ export const allCars: Car[] = [
     dealer: "ОПТИМА ОНЛАЙН, Краснодар",
     color: "Искрящийся белый",
     vin: "EDEEB11B*SE****68"
+  },
+  {
+    id: "tenet-t4-cvt-line-grey",
+    name: "Tenet T4",
+    price: 2129000,
+    monthly: 31800,
+    info: "1 автомобиль",
+    images: [
+        PlaceHolderImages.find((img) => img.id === "tenet-4")!,
+        PlaceHolderImages.find((img) => img.id === "tenet-t4-front")!,
+        PlaceHolderImages.find((img) => img.id === "tenet-t4-profile")!,
+        PlaceHolderImages.find((img) => img.id === "tenet-t4-back")!,
+    ],
+    gearbox: "вариатор",
+    bodyType: "внедорожник",
+    count: 1,
+    seats: 5,
+    specs: [
+      { label: 'Разгон до 100 км/ч', value: '10.5 с' },
+      { label: 'Тип топлива', value: 'Бензин' },
+      { label: 'Расход топлива', value: '7.8 л/100км' },
+      { label: 'Объем двигателя', value: '1.5 л.' },
+      { label: 'Мощность', value: '113 л.с.' },
+      { label: 'Кол-во мест', value: '5 мест' },
+    ],
+    trims: [
+       {
+        name: 'CVT Line',
+        price: 2129000,
+        specs: [
+          { label: 'Двигатель', value: '1.5л, 113 л.с.'},
+          { label: 'Трансмиссия', value: 'Вариатор'},
+          { label: 'Привод', value: 'Передний'},
+        ],
+      }
+    ],
+    seoText: {
+        title: "Энергия вашего города",
+        description: "Tenet T4 — это компактный городской кроссовер для тех, кто живет в ритме мегаполиса. Стильный дизайн, маневренность и экономичный расход топлива делают его идеальным спутником в плотном трафике Краснодара. Внутри вас ждет продуманная эргономика и современные смарт-технологии, которые превращают каждую поездку в удовольствие.",
+        audience: "Для кого: Для молодых водителей и тех, кто ищет свой первый надежный кроссовер с богатым оснащением по доступной цене."
+    },
+    trimName: "CVT Line",
+    year: 2025,
+    engineVolume: "1.5",
+    transmission: "Вариатор",
+    drivetrain: "Передний привод",
+    status: "У дилера",
+    dealer: "ЛЕОН-АВТО ОНЛАЙН, Краснодар",
+    color: "Технологичный серый",
+    vin: "EDEEB41B*SE****21"
   },
   {
     id: "tenet-t7",
