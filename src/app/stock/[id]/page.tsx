@@ -17,6 +17,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Heart, Share2 } from "lucide-react";
+import { HelpForm } from "@/components/help-form";
 
 export async function generateStaticParams() {
   return allCars.map((car) => ({
@@ -160,9 +161,11 @@ export default function CarPage({ params }: { params: { id: string } }) {
               </div>
 
               <div className="mt-8 flex flex-col gap-2">
-                <Button size="lg" className="w-full">
-                  Оставить заявку
-                </Button>
+                <Link href="#help-form" passHref>
+                  <Button size="lg" className="w-full">
+                    Оставить заявку
+                  </Button>
+                </Link>
                 <div className="flex gap-2">
                   <Button variant="outline" className="w-full">
                     <Share2 className="mr-2 h-4 w-4" />
@@ -175,6 +178,9 @@ export default function CarPage({ params }: { params: { id: string } }) {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="mt-16">
+            <HelpForm />
           </div>
         </div>
       </main>
