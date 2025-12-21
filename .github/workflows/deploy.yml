@@ -67,4 +67,3 @@ jobs:
           YC_TOKEN: ${{ secrets.YC_OAUTH_TOKEN }}
           YC_CLOUD_ID: ${{ secrets.YC_CLOUD_ID }}
           YC_FOLDER_ID: ${{ secrets.YC_FOLDER_ID }}
-
