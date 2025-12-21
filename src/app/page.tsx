@@ -18,6 +18,7 @@ export default function Home() {
   const [gearboxFilter, setGearboxFilter] = useState<string[]>([]);
   const [bodyTypeFilter, setBodyTypeFilter] = useState<string[]>([]);
   const [seatsFilter, setSeatsFilter] = useState<number[]>([]);
+  const [modelFilter, setModelFilter] = useState<string[]>([]);
 
   const minPrice = useMemo(() => Math.min(...allCars.map(car => car.price)), []);
   const maxPrice = useMemo(() => Math.max(...allCars.map(car => car.price)), []);
@@ -49,6 +50,14 @@ export default function Home() {
         : [...prev, seats]
     );
   };
+  
+  const handleModelChange = (model: string) => {
+    setModelFilter(prev =>
+      prev.includes(model)
+        ? prev.filter(m => m !== model)
+        : [...prev, model]
+    );
+  };
 
   const handlePriceChange = (newRange: [number, number]) => {
     setPriceRange(newRange);
@@ -70,9 +79,13 @@ export default function Home() {
     if (seatsFilter.length > 0) {
         cars = cars.filter(car => seatsFilter.includes(car.seats));
     }
+    
+    if (modelFilter.length > 0) {
+        cars = cars.filter(car => modelFilter.includes(car.name));
+    }
 
     return cars;
-  }, [gearboxFilter, bodyTypeFilter, seatsFilter, priceRange]);
+  }, [gearboxFilter, bodyTypeFilter, seatsFilter, priceRange, modelFilter]);
   
   const totalCarCount = useMemo(() => {
     return filteredCars.reduce((total, car) => total + car.count, 0);
@@ -83,6 +96,7 @@ export default function Home() {
     if (gearboxFilter.length > 0) params.set('gearbox', gearboxFilter.join(','));
     if (bodyTypeFilter.length > 0) params.set('body', bodyTypeFilter.join(','));
     if (seatsFilter.length > 0) params.set('seats', seatsFilter.join(','));
+    if (modelFilter.length > 0) params.set('model', modelFilter.join(','));
     params.set('price', `${priceRange[0]},${priceRange[1]}`);
     
     router.push(`/stock?${params.toString()}`);
@@ -111,6 +125,8 @@ export default function Home() {
                 selectedBodyTypes={bodyTypeFilter}
                 onSeatsChange={handleSeatsChange}
                 selectedSeats={seatsFilter}
+                onModelChange={handleModelChange}
+                selectedModels={modelFilter}
                 carCount={totalCarCount}
                 onShowClick={handleShowClick}
               />

@@ -20,17 +20,20 @@ function StockPageContent() {
   const [gearboxFilter, setGearboxFilter] = useState<string[]>([]);
   const [bodyTypeFilter, setBodyTypeFilter] = useState<string[]>([]);
   const [seatsFilter, setSeatsFilter] = useState<number[]>([]);
+  const [modelFilter, setModelFilter] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState<[number, number]>([minPrice, maxPrice]);
 
   useEffect(() => {
     const gearbox = searchParams.get('gearbox');
     const body = searchParams.get('body');
     const seats = searchParams.get('seats');
+    const model = searchParams.get('model');
     const price = searchParams.get('price');
     
     if (gearbox) setGearboxFilter(gearbox.split(','));
     if (body) setBodyTypeFilter(body.split(','));
     if (seats) setSeatsFilter(seats.split(',').map(Number));
+    if (model) setModelFilter(model.split(','));
     if (price) {
       const [min, max] = price.split(',').map(Number);
       if (!isNaN(min) && !isNaN(max)) {
@@ -47,8 +50,10 @@ function StockPageContent() {
         params.set(key, value.join(','));
       } else if (typeof value === 'string' && value) {
         params.set(key, value);
-      } else if (Array.isArray(value) && value.length === 0) {
+      } else if ((Array.isArray(value) && value.length === 0) || value === null || value === undefined) {
         params.delete(key);
+      } else if(typeof value === 'object' && !Array.isArray(value) && value !== null) {
+         if (value.length === 0) params.delete(key);
       }
     });
     router.replace(`/stock?${params.toString()}`);
@@ -77,6 +82,14 @@ function StockPageContent() {
     setSeatsFilter(newSeatsFilter);
     updateURLParams({ seats: newSeatsFilter });
   };
+  
+  const handleModelChange = (model: string) => {
+    const newModelFilter = modelFilter.includes(model)
+      ? modelFilter.filter(m => m !== model)
+      : [...modelFilter, model];
+    setModelFilter(newModelFilter);
+    updateURLParams({ model: newModelFilter });
+  };
 
   const handlePriceChange = (newRange: [number, number]) => {
     setPriceRange(newRange);
@@ -100,8 +113,12 @@ function StockPageContent() {
         cars = cars.filter(car => seatsFilter.includes(car.seats));
     }
 
+    if (modelFilter.length > 0) {
+        cars = cars.filter(car => modelFilter.includes(car.name));
+    }
+
     return cars;
-  }, [gearboxFilter, bodyTypeFilter, seatsFilter, priceRange]);
+  }, [gearboxFilter, bodyTypeFilter, seatsFilter, modelFilter, priceRange]);
   
   const totalCarCount = useMemo(() => {
     return filteredCars.reduce((total, car) => total + car.count, 0);
@@ -125,6 +142,8 @@ function StockPageContent() {
                 selectedBodyTypes={bodyTypeFilter}
                 onSeatsChange={handleSeatsChange}
                 selectedSeats={seatsFilter}
+                onModelChange={handleModelChange}
+                selectedModels={modelFilter}
                 carCount={totalCarCount}
                 showButton={false}
               />

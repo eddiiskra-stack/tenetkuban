@@ -11,14 +11,8 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { X } from "lucide-react";
+import { allCars } from "@/lib/cars";
 
 const colors = [
     { name: "Благородный серый", hex: "#A9A9A9" },
@@ -30,6 +24,7 @@ const colors = [
     { name: "Огненно-красный", hex: "#FF4500" },
     { name: "Серебристый", hex: "#C0C0C0" },
     { name: "Технологичный серый", hex: "#808080" },
+    { name: "Глубокий синий", hex: "#00008B" },
 ];
 
 
@@ -44,6 +39,8 @@ type CarFiltersProps = {
   selectedBodyTypes: string[];
   onSeatsChange: (seats: number) => void;
   selectedSeats: number[];
+  onModelChange: (model: string) => void;
+  selectedModels: string[];
   carCount: number;
   onShowClick?: () => void;
   showButton?: boolean;
@@ -59,7 +56,9 @@ export function CarFilters({
   onBodyTypeChange, 
   selectedBodyTypes, 
   onSeatsChange, 
-  selectedSeats, 
+  selectedSeats,
+  onModelChange,
+  selectedModels,
   carCount,
   onShowClick,
   showButton = true,
@@ -80,6 +79,12 @@ export function CarFilters({
     }
     return 'новых автомобилей';
   };
+  
+  const modelCounts = {
+    'Tenet T4': allCars.filter(car => car.name === 'Tenet T4').length,
+    'Tenet T7': allCars.filter(car => car.name === 'Tenet T7').length,
+    'Tenet T8': allCars.filter(car => car.name === 'Tenet T8').length,
+  };
 
 
   return (
@@ -98,18 +103,6 @@ export function CarFilters({
                           <X className="w-3.5 h-3.5 cursor-pointer"/>
                       </div>
                    </div>
-                </div>
-                <div>
-                  <label className="text-xs font-semibold text-muted-foreground">ДИЛЕРСКИЙ ЦЕНТР</label>
-                  <Select>
-                      <SelectTrigger className="w-full mt-1">
-                          <SelectValue placeholder="Выберите" />
-                      </SelectTrigger>
-                      <SelectContent>
-                          <SelectItem value="leon-avto">ЛЕОН-АВТО ОНЛАЙН</SelectItem>
-                          <SelectItem value="optima-online">ОПТИМА ОНЛАЙН</SelectItem>
-                      </SelectContent>
-                  </Select>
                 </div>
                 <div className="space-y-2 pt-2">
                     <div className="flex items-center gap-2">
@@ -158,25 +151,34 @@ export function CarFilters({
             <AccordionContent>
               <div className="space-y-2 pt-2">
                 <div className="flex items-center justify-between">
-                  <label htmlFor="tenet-t4" className="flex items-center gap-2 text-sm cursor-pointer">
-                    <Checkbox id="tenet-t4" />
+                   <label htmlFor="tenet-t4" className="flex items-center gap-2 text-sm cursor-pointer">
+                    <Checkbox id="tenet-t4"
+                      onCheckedChange={() => onModelChange('Tenet T4')}
+                      checked={selectedModels.includes('Tenet T4')}
+                    />
                     Tenet T4
                   </label>
-                  <span className="text-xs text-muted-foreground">3</span>
+                  <span className="text-xs text-muted-foreground">{modelCounts['Tenet T4']}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <label htmlFor="tenet-t7" className="flex items-center gap-2 text-sm cursor-pointer">
-                    <Checkbox id="tenet-t7" />
+                   <label htmlFor="tenet-t7" className="flex items-center gap-2 text-sm cursor-pointer">
+                    <Checkbox id="tenet-t7"
+                      onCheckedChange={() => onModelChange('Tenet T7')}
+                      checked={selectedModels.includes('Tenet T7')}
+                    />
                     Tenet T7
                   </label>
-                  <span className="text-xs text-muted-foreground">13</span>
+                  <span className="text-xs text-muted-foreground">{modelCounts['Tenet T7']}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <label htmlFor="tenet-t8" className="flex items-center gap-2 text-sm cursor-pointer">
-                    <Checkbox id="tenet-t8" />
+                   <label htmlFor="tenet-t8" className="flex items-center gap-2 text-sm cursor-pointer">
+                    <Checkbox id="tenet-t8"
+                      onCheckedChange={() => onModelChange('Tenet T8')}
+                      checked={selectedModels.includes('Tenet T8')}
+                    />
                     Tenet T8
                   </label>
-                  <span className="text-xs text-muted-foreground">5</span>
+                  <span className="text-xs text-muted-foreground">{modelCounts['Tenet T8']}</span>
                 </div>
               </div>
             </AccordionContent>
@@ -291,5 +293,3 @@ export function CarFilters({
     </div>
   );
 }
-
-    
