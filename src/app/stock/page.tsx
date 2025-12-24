@@ -22,6 +22,7 @@ function StockPageContent() {
   const [seatsFilter, setSeatsFilter] = useState<number[]>([]);
   const [modelFilter, setModelFilter] = useState<string[]>([]);
   const [colorFilter, setColorFilter] = useState<string[]>([]);
+  const [statusFilter, setStatusFilter] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState<[number, number]>([minPrice, maxPrice]);
 
   useEffect(() => {
@@ -30,6 +31,7 @@ function StockPageContent() {
     const seats = searchParams.get('seats');
     const model = searchParams.get('model');
     const color = searchParams.get('color');
+    const status = searchParams.get('status');
     const price = searchParams.get('price');
     
     if (gearbox) setGearboxFilter(gearbox.split(','));
@@ -37,6 +39,7 @@ function StockPageContent() {
     if (seats) setSeatsFilter(seats.split(',').map(Number));
     if (model) setModelFilter(model.split(','));
     if (color) setColorFilter(color.split(','));
+    if (status) setStatusFilter(status.split(','));
     if (price) {
       const [min, max] = price.split(',').map(Number);
       if (!isNaN(min) && !isNaN(max)) {
@@ -108,6 +111,14 @@ function StockPageContent() {
     updateURLParams({ color: newColorFilter });
   };
 
+  const handleStatusChange = (status: string) => {
+    const newStatusFilter = statusFilter.includes(status)
+      ? statusFilter.filter(s => s !== status)
+      : [...statusFilter, status];
+    setStatusFilter(newStatusFilter);
+    updateURLParams({ status: newStatusFilter });
+  };
+
   const handlePriceChange = (newRange: [number, number]) => {
     setPriceRange(newRange);
     updateURLParams({ price: newRange.join(',') });
@@ -119,6 +130,7 @@ function StockPageContent() {
     setSeatsFilter([]);
     setModelFilter([]);
     setColorFilter([]);
+    setStatusFilter([]);
     setPriceRange([minPrice, maxPrice]);
     updateURLParams({}, true);
   };
@@ -148,8 +160,12 @@ function StockPageContent() {
         cars = cars.filter(car => car.color ? colorFilter.includes(car.color) : false);
     }
 
+    if (statusFilter.length > 0) {
+        cars = cars.filter(car => car.status ? statusFilter.includes(car.status) : false);
+    }
+
     return cars;
-  }, [gearboxFilter, bodyTypeFilter, seatsFilter, modelFilter, colorFilter, priceRange]);
+  }, [gearboxFilter, bodyTypeFilter, seatsFilter, modelFilter, colorFilter, statusFilter, priceRange]);
   
   const totalCarCount = useMemo(() => {
     return filteredCars.reduce((total, car) => total + car.count, 0);
@@ -177,6 +193,8 @@ function StockPageContent() {
                 selectedModels={modelFilter}
                 onColorChange={handleColorChange}
                 selectedColors={colorFilter}
+                onStatusChange={handleStatusChange}
+                selectedStatuses={statusFilter}
                 carCount={totalCarCount}
                 onResetClick={handleResetFilters}
                 showButton={false}

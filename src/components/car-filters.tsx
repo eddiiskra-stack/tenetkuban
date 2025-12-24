@@ -1,6 +1,6 @@
 
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import {
   Accordion,
   AccordionContent,
@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
-import { X } from "lucide-react";
 import { allCars } from "@/lib/cars";
 import { cn } from "@/lib/utils";
 
@@ -27,6 +26,8 @@ const colors = [
     { name: "Технологичный серый", hex: "#808080" },
     { name: "Глубокий синий", hex: "#00008B" },
 ];
+
+const statuses = ["В пути", "У дилера", "Центральный склад"];
 
 
 type CarFiltersProps = {
@@ -44,6 +45,8 @@ type CarFiltersProps = {
   selectedModels: string[];
   onColorChange: (color: string) => void;
   selectedColors: string[];
+  onStatusChange: (status: string) => void;
+  selectedStatuses: string[];
   carCount: number;
   onShowClick?: () => void;
   onResetClick?: () => void;
@@ -65,6 +68,8 @@ export function CarFilters({
   selectedModels,
   onColorChange,
   selectedColors,
+  onStatusChange,
+  selectedStatuses,
   carCount,
   onShowClick,
   onResetClick,
@@ -101,21 +106,19 @@ export function CarFilters({
           <AccordionItem value="location">
             <AccordionTrigger className="text-sm font-semibold">ГДЕ КУПИТЬ</AccordionTrigger>
             <AccordionContent>
-              <div className="space-y-4 pt-2">
-                <div className="space-y-2 pt-2">
-                    <div className="flex items-center gap-2">
-                        <Checkbox id="status-in-transit" />
-                        <label htmlFor="status-in-transit" className="text-sm cursor-pointer">В пути</label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <Checkbox id="status-at-dealer" />
-                        <label htmlFor="status-at-dealer" className="text-sm cursor-pointer">У дилера</label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <Checkbox id="status-central-stock" />
-                        <label htmlFor="status-central-stock" className="text-sm cursor-pointer">Центральный склад</label>
-                    </div>
-                </div>
+              <div className="space-y-2 pt-2">
+                {statuses.map((status) => (
+                  <div key={status} className="flex items-center gap-2">
+                    <Checkbox
+                      id={`status-${status}`}
+                      onCheckedChange={() => onStatusChange(status)}
+                      checked={selectedStatuses.includes(status)}
+                    />
+                    <label htmlFor={`status-${status}`} className="text-sm cursor-pointer">
+                      {status}
+                    </label>
+                  </div>
+                ))}
               </div>
             </AccordionContent>
           </AccordionItem>

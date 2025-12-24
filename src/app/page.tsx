@@ -20,6 +20,7 @@ export default function Home() {
   const [seatsFilter, setSeatsFilter] = useState<number[]>([]);
   const [modelFilter, setModelFilter] = useState<string[]>([]);
   const [colorFilter, setColorFilter] = useState<string[]>([]);
+  const [statusFilter, setStatusFilter] = useState<string[]>([]);
 
   const minPrice = useMemo(() => Math.min(...allCars.map(car => car.price)), []);
   const maxPrice = useMemo(() => Math.max(...allCars.map(car => car.price)), []);
@@ -68,6 +69,14 @@ export default function Home() {
     );
   };
 
+  const handleStatusChange = (status: string) => {
+    setStatusFilter(prev =>
+      prev.includes(status)
+        ? prev.filter(s => s !== status)
+        : [...prev, status]
+    );
+  };
+
   const handlePriceChange = (newRange: [number, number]) => {
     setPriceRange(newRange);
   };
@@ -78,6 +87,7 @@ export default function Home() {
     setSeatsFilter([]);
     setModelFilter([]);
     setColorFilter([]);
+    setStatusFilter([]);
     setPriceRange([minPrice, maxPrice]);
   };
 
@@ -106,8 +116,12 @@ export default function Home() {
         cars = cars.filter(car => car.color ? colorFilter.includes(car.color) : false);
     }
 
+    if (statusFilter.length > 0) {
+        cars = cars.filter(car => car.status ? statusFilter.includes(car.status) : false);
+    }
+
     return cars;
-  }, [gearboxFilter, bodyTypeFilter, seatsFilter, priceRange, modelFilter, colorFilter]);
+  }, [gearboxFilter, bodyTypeFilter, seatsFilter, priceRange, modelFilter, colorFilter, statusFilter]);
   
   const totalCarCount = useMemo(() => {
     return filteredCars.reduce((total, car) => total + car.count, 0);
@@ -120,6 +134,7 @@ export default function Home() {
     if (seatsFilter.length > 0) params.set('seats', seatsFilter.join(','));
     if (modelFilter.length > 0) params.set('model', modelFilter.join(','));
     if (colorFilter.length > 0) params.set('color', colorFilter.join(','));
+    if (statusFilter.length > 0) params.set('status', statusFilter.join(','));
     params.set('price', `${priceRange[0]},${priceRange[1]}`);
     
     router.push(`/stock?${params.toString()}`);
@@ -152,6 +167,8 @@ export default function Home() {
                 selectedModels={modelFilter}
                 onColorChange={handleColorChange}
                 selectedColors={colorFilter}
+                onStatusChange={handleStatusChange}
+                selectedStatuses={statusFilter}
                 carCount={totalCarCount}
                 onShowClick={handleShowClick}
                 onResetClick={handleResetFilters}
