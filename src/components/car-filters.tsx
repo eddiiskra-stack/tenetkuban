@@ -99,15 +99,6 @@ export function CarFilters({
             <AccordionTrigger className="text-sm font-semibold">ГДЕ КУПИТЬ</AccordionTrigger>
             <AccordionContent>
               <div className="space-y-4 pt-2">
-                <div>
-                  <label className="text-xs font-semibold text-muted-foreground">ГОРОД</label>
-                   <div className="flex items-center gap-2 mt-1">
-                      <div className="flex items-center gap-1.5 bg-muted text-muted-foreground px-2 py-1 rounded-full">
-                          <span>Краснодар</span>
-                          <X className="w-3.5 h-3.5 cursor-pointer"/>
-                      </div>
-                   </div>
-                </div>
                 <div className="space-y-2 pt-2">
                     <div className="flex items-center gap-2">
                         <Checkbox id="status-in-transit" />
