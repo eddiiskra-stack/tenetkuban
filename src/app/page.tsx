@@ -19,6 +19,7 @@ export default function Home() {
   const [bodyTypeFilter, setBodyTypeFilter] = useState<string[]>([]);
   const [seatsFilter, setSeatsFilter] = useState<number[]>([]);
   const [modelFilter, setModelFilter] = useState<string[]>([]);
+  const [colorFilter, setColorFilter] = useState<string[]>([]);
 
   const minPrice = useMemo(() => Math.min(...allCars.map(car => car.price)), []);
   const maxPrice = useMemo(() => Math.max(...allCars.map(car => car.price)), []);
@@ -59,6 +60,14 @@ export default function Home() {
     );
   };
 
+  const handleColorChange = (color: string) => {
+    setColorFilter(prev =>
+      prev.includes(color)
+        ? prev.filter(c => c !== color)
+        : [...prev, color]
+    );
+  };
+
   const handlePriceChange = (newRange: [number, number]) => {
     setPriceRange(newRange);
   };
@@ -77,15 +86,19 @@ export default function Home() {
     }
 
     if (seatsFilter.length > 0) {
-        cars = cars.filter(car => seatsFilter.includes(car.seats));
+        cars = cars.filter(car => car.seats ? seatsFilter.includes(car.seats) : false);
     }
     
     if (modelFilter.length > 0) {
         cars = cars.filter(car => modelFilter.includes(car.name));
     }
 
+    if (colorFilter.length > 0) {
+        cars = cars.filter(car => car.color ? colorFilter.includes(car.color) : false);
+    }
+
     return cars;
-  }, [gearboxFilter, bodyTypeFilter, seatsFilter, priceRange, modelFilter]);
+  }, [gearboxFilter, bodyTypeFilter, seatsFilter, priceRange, modelFilter, colorFilter]);
   
   const totalCarCount = useMemo(() => {
     return filteredCars.reduce((total, car) => total + car.count, 0);
@@ -97,6 +110,7 @@ export default function Home() {
     if (bodyTypeFilter.length > 0) params.set('body', bodyTypeFilter.join(','));
     if (seatsFilter.length > 0) params.set('seats', seatsFilter.join(','));
     if (modelFilter.length > 0) params.set('model', modelFilter.join(','));
+    if (colorFilter.length > 0) params.set('color', colorFilter.join(','));
     params.set('price', `${priceRange[0]},${priceRange[1]}`);
     
     router.push(`/stock?${params.toString()}`);
@@ -127,6 +141,8 @@ export default function Home() {
                 selectedSeats={seatsFilter}
                 onModelChange={handleModelChange}
                 selectedModels={modelFilter}
+                onColorChange={handleColorChange}
+                selectedColors={colorFilter}
                 carCount={totalCarCount}
                 onShowClick={handleShowClick}
               />

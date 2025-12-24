@@ -1,4 +1,3 @@
-
 "use client";
 import React, { useState } from "react";
 import {
@@ -13,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { X } from "lucide-react";
 import { allCars } from "@/lib/cars";
+import { cn } from "@/lib/utils";
 
 const colors = [
     { name: "Благородный серый", hex: "#A9A9A9" },
@@ -41,6 +41,8 @@ type CarFiltersProps = {
   selectedSeats: number[];
   onModelChange: (model: string) => void;
   selectedModels: string[];
+  onColorChange: (color: string) => void;
+  selectedColors: string[];
   carCount: number;
   onShowClick?: () => void;
   showButton?: boolean;
@@ -59,6 +61,8 @@ export function CarFilters({
   selectedSeats,
   onModelChange,
   selectedModels,
+  onColorChange,
+  selectedColors,
   carCount,
   onShowClick,
   showButton = true,
@@ -186,16 +190,18 @@ export function CarFilters({
           <AccordionItem value="color">
             <AccordionTrigger className="text-sm font-semibold">ЦВЕТ</AccordionTrigger>
             <AccordionContent>
-                <div className="space-y-2 pt-2">
+                <div className="grid grid-cols-6 gap-2 pt-2">
                     {colors.map((color) => (
-                         <div key={color.name} className="flex items-center gap-2">
-                            <button 
-                                className="w-6 h-6 rounded-full border-2 border-muted"
-                                style={{ backgroundColor: color.hex }}
-                                aria-label={color.name}
-                            />
-                            <label className="text-sm cursor-pointer">{color.name}</label>
-                        </div>
+                         <button 
+                            key={color.name}
+                            className={cn(
+                                "w-8 h-8 rounded-full border-2",
+                                selectedColors.includes(color.name) ? 'border-primary' : 'border-muted'
+                            )}
+                            style={{ backgroundColor: color.hex }}
+                            aria-label={color.name}
+                            onClick={() => onColorChange(color.name)}
+                         />
                     ))}
                 </div>
             </AccordionContent>

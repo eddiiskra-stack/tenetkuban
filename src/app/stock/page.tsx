@@ -21,6 +21,7 @@ function StockPageContent() {
   const [bodyTypeFilter, setBodyTypeFilter] = useState<string[]>([]);
   const [seatsFilter, setSeatsFilter] = useState<number[]>([]);
   const [modelFilter, setModelFilter] = useState<string[]>([]);
+  const [colorFilter, setColorFilter] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState<[number, number]>([minPrice, maxPrice]);
 
   useEffect(() => {
@@ -28,12 +29,14 @@ function StockPageContent() {
     const body = searchParams.get('body');
     const seats = searchParams.get('seats');
     const model = searchParams.get('model');
+    const color = searchParams.get('color');
     const price = searchParams.get('price');
     
     if (gearbox) setGearboxFilter(gearbox.split(','));
     if (body) setBodyTypeFilter(body.split(','));
     if (seats) setSeatsFilter(seats.split(',').map(Number));
     if (model) setModelFilter(model.split(','));
+    if (color) setColorFilter(color.split(','));
     if (price) {
       const [min, max] = price.split(',').map(Number);
       if (!isNaN(min) && !isNaN(max)) {
@@ -91,6 +94,14 @@ function StockPageContent() {
     updateURLParams({ model: newModelFilter });
   };
 
+  const handleColorChange = (color: string) => {
+    const newColorFilter = colorFilter.includes(color)
+      ? colorFilter.filter(c => c !== color)
+      : [...colorFilter, color];
+    setColorFilter(newColorFilter);
+    updateURLParams({ color: newColorFilter });
+  };
+
   const handlePriceChange = (newRange: [number, number]) => {
     setPriceRange(newRange);
     updateURLParams({ price: newRange.join(',') });
@@ -110,15 +121,19 @@ function StockPageContent() {
     }
 
     if (seatsFilter.length > 0) {
-        cars = cars.filter(car => seatsFilter.includes(car.seats));
+        cars = cars.filter(car => car.seats ? seatsFilter.includes(car.seats) : false);
     }
 
     if (modelFilter.length > 0) {
         cars = cars.filter(car => modelFilter.includes(car.name));
     }
+    
+    if (colorFilter.length > 0) {
+        cars = cars.filter(car => car.color ? colorFilter.includes(car.color) : false);
+    }
 
     return cars;
-  }, [gearboxFilter, bodyTypeFilter, seatsFilter, modelFilter, priceRange]);
+  }, [gearboxFilter, bodyTypeFilter, seatsFilter, modelFilter, colorFilter, priceRange]);
   
   const totalCarCount = useMemo(() => {
     return filteredCars.reduce((total, car) => total + car.count, 0);
@@ -144,6 +159,8 @@ function StockPageContent() {
                 selectedSeats={seatsFilter}
                 onModelChange={handleModelChange}
                 selectedModels={modelFilter}
+                onColorChange={handleColorChange}
+                selectedColors={colorFilter}
                 carCount={totalCarCount}
                 showButton={false}
               />
