@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /_next/
-Sitemap: https://tenet-kuban.ru/sitemap.xml
+Sitemap: https://tenetkuban.ru/sitemap.xml
