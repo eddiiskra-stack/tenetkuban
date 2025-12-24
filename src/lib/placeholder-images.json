@@ -43,6 +43,36 @@
       "imageHint": "red suv back"
     },
     {
+      "id": "tenet-t4-black-1",
+      "description": "Black Tenet T4 side profile",
+      "imageUrl": "/images/T4/black/T4 (1).webp",
+      "imageHint": "black suv profile"
+    },
+    {
+      "id": "tenet-t4-black-2",
+      "description": "Black Tenet T4 front quarter view",
+      "imageUrl": "/images/T4/black/T4 (2).webp",
+      "imageHint": "black suv front"
+    },
+    {
+      "id": "tenet-t4-black-3",
+      "description": "Black Tenet T4 rear quarter view",
+      "imageUrl": "/images/T4/black/T4 (3).webp",
+      "imageHint": "black suv back"
+    },
+    {
+      "id": "tenet-t4-black-4",
+      "description": "Black Tenet T4 interior dashboard",
+      "imageUrl": "/images/T4/black/T4 (4).webp",
+      "imageHint": "suv interior"
+    },
+    {
+      "id": "tenet-t4-black-5",
+      "description": "Black Tenet T4 front view",
+      "imageUrl": "/images/T4/black/T4 (5).webp",
+      "imageHint": "black suv front"
+    },
+    {
       "id": "tenet-7",
       "description": "Tenet 7 model car",
       "imageUrl": "https://1.cdn.perxis.ru/originals/d2i49kqto5r46kvtt850/original",
