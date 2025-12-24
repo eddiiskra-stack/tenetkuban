@@ -2033,6 +2033,39 @@ export const allCars: Car[] = [
     color: "Глубокий черный",
     vin: "LXYZ7***18"
   },
+  {
+    id: "vin-EDEFB32BSE---01",
+    name: "Tenet T7",
+    price: 2630000,
+    monthly: 0,
+    info: "1 автомобиль",
+    images: [
+      PlaceHolderImages.find((img) => img.id === "tenet-7")!,
+      PlaceHolderImages.find((img) => img.id === "tenet-t7-main")!,
+      PlaceHolderImages.find((img) => img.id === "tenet-t7-profile")!,
+      PlaceHolderImages.find((img) => img.id === "tenet-t7-rear")!,
+    ],
+    gearbox: "робот",
+    bodyType: "внедорожник",
+    count: 1,
+    seats: 5,
+    specs: [],
+    trims: [],
+    seoText: {
+      title: "Простор и комфорт для всей семьи",
+      description: "Tenet T7 — это вместительный и надежный внедорожник, созданный для путешествий и семейных поездок по Краснодарскому краю. Мощный двигатель, просторный салон и богатое оснащение обеспечивают комфорт и безопасность на любом маршруте. Высокий клиренс и полный привод (в зависимости от комплектации) позволяют уверенно чувствовать себя как на асфальте, так и за его пределами.",
+      audience: "Для кого: Для семей, которые ценят комфорт и безопасность, а также для любителей активного отдыха и путешествий."
+    },
+    trimName: "Active 2WD",
+    year: 2025,
+    engineVolume: "1.6",
+    transmission: "Робот",
+    drivetrain: "Передний привод",
+    status: "У дилера",
+    dealer: "ЛЕОН-АВТО ОНЛАЙН, Краснодар",
+    color: "Технологичный серый",
+    vin: "EDEFB32BSE***01"
+  }
 ].filter(car => car.color);
 
     
@@ -2040,3 +2073,4 @@ export const allCars: Car[] = [
     
 
     
+
