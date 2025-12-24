@@ -6,7 +6,7 @@ const URL = 'https://tenet-servis-kuban.ru';
 export const revalidate = 0;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPages = [
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: `${URL}/`,
       lastModified: new Date(),
@@ -27,19 +27,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const modelIds = [...new Set(allCars.map(car => car.id.split('-')[0] + '-' + car.id.split('-')[1]))];
+  const modelIds = [...new Set(allCars.map(car => {
+    // Only get the base model ID, e.g., "tenet-t4" from "tenet-t4-cvt-line-white"
+    if (car.id.startsWith('tenet-t')) {
+        const parts = car.id.split('-');
+        if(parts.length >= 2) {
+            return `${parts[0]}-${parts[1]}`;
+        }
+    }
+    return null;
+  }).filter((id): id is string => id !== null && id.startsWith('tenet-t')))];
 
-  const carModelPages = modelIds
-    .filter(id => allCars.find(car => car.id === id)) // Ensure we only create pages for base models
+
+  const carModelPages: MetadataRoute.Sitemap = modelIds
     .map((id) => ({
       url: `${URL}/models/${id}`,
-      lastModified: new
-Date(),
+      lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     }));
 
-  const carStockPages = allCars.map((car) => ({
+  const carStockPages: MetadataRoute.Sitemap = allCars.map((car) => ({
     url: `${URL}/stock/${car.id}`,
     lastModified: new Date(),
     changeFrequency: 'daily',
