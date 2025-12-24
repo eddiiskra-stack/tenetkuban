@@ -44,6 +44,43 @@ export type Car = {
   vin?: string;
 };
 
+export type Model = {
+    id: string;
+    name: string;
+    description: string;
+    image: ImagePlaceholder;
+    price: number;
+    link: string;
+}
+
+export const allModels: Model[] = [
+    {
+        id: 't4',
+        name: 'Tenet T4',
+        description: 'Компактный городской кроссовер для тех, кто живет в ритме мегаполиса. Стильный дизайн, маневренность и экономичный расход топлива делают его идеальным спутником в плотном трафике.',
+        image: PlaceHolderImages.find((img) => img.id === 'tenet-4')!,
+        price: 1999000,
+        link: '/models/tenet-t4-mt-line-white'
+    },
+    {
+        id: 't7',
+        name: 'Tenet T7',
+        description: 'Вместительный и надежный внедорожник, созданный для путешествий и семейных поездок. Мощный двигатель, просторный салон и богатое оснащение обеспечивают комфорт и безопасность.',
+        image: PlaceHolderImages.find((img) => img.id === 'tenet-7')!,
+        price: 2630000,
+        link: '/models/vin-EDEFB32BSE---01'
+    },
+    {
+        id: 't8',
+        name: 'Tenet T8',
+        description: 'Яркий и технологичный лифтбек для тех, кто ценит динамику и передовые решения. Футуристичный дизайн, впечатляющая мощность и интеллектуальные системы помощи водителю.',
+        image: PlaceHolderImages.find((img) => img.id === 'tenet-8')!,
+        price: 3399900,
+        link: '/models/tenet-t8-premium-sport-blue'
+    }
+];
+
+
 export const allCars: Car[] = [
   {
     id: "tenet-t4-mt-line-white",
@@ -389,7 +426,7 @@ export const allCars: Car[] = [
     seoText: {
         title: "Энергия вашего города",
         description: "Tenet T4 — это компактный городской кроссовер для тех, кто живет в ритме мегаполиса. Стильный дизайн, маневренность и экономичный расход топлива делают его идеальным спутником в плотном трафике Краснодара. Внутри вас ждет продуманная эргономика и современные смарт-технологии, которые превращают каждую поездку в удовольствие.",
-        audience: "Для кого: Для молодых водителей и тех, кто ищет свой первый надежный кроссовер с богатым оснащением по доступной цене."
+        audience: "Для кого: Для молодых водителей и тех, кто ищет свой первый надежный кроссоver с богатым оснащением по доступной цене."
     },
     trimName: "CVT Line",
     year: 2025,
@@ -2065,12 +2102,55 @@ export const allCars: Car[] = [
     dealer: "ЛЕОН-АВТО ОНЛАЙН, Краснодар",
     color: "Технологичный серый",
     vin: "EDEFB32BSE***01"
+  },
+  {
+    id: "tenet-t8-premium-sport-blue",
+    name: "Tenet T8",
+    price: 3399900,
+    monthly: 45000,
+    info: "1 автомобиль",
+    images: [
+      PlaceHolderImages.find((img) => img.id === "tenet-8")!,
+      PlaceHolderImages.find((img) => img.id === "tenet-t8-main")!,
+      PlaceHolderImages.find((img) => img.id === "tenet-t8-profile")!,
+      PlaceHolderImages.find((img) => img.id === "tenet-t8-rear")!,
+    ],
+    gearbox: "робот",
+    bodyType: "внедорожник",
+    count: 1,
+    seats: 5,
+    specs: [
+        { label: 'Разгон до 100 км/ч', value: '6.9 с' },
+        { label: 'Тип топлива', value: 'Бензин' },
+        { label: 'Расход топлива', value: '8.5 л/100км' },
+        { label: 'Объем двигателя', value: '2.0 л.' },
+        { label: 'Мощность', value: '249 л.с.' },
+        { label: 'Кол-во мест', value: '5 мест' },
+    ],
+    trims: [
+       {
+        name: 'Premium Sport',
+        price: 3399900,
+        specs: [
+          { label: 'Двигатель', value: '2.0л, 249 л.с.'},
+          { label: 'Трансмиссия', value: 'Робот'},
+          { label: 'Привод', value: 'Полный'},
+        ],
+      }
+    ],
+    seoText: {
+        title: "Будущее в движении",
+        description: "Tenet T8 — это яркий и технологичный лифтбек для тех, кто ценит динамику и передовые решения. Футуристичный дизайн, впечатляющая мощность и интеллектуальные системы помощи водителю дарят незабываемые эмоции от каждой поездки. Этот автомобиль создан, чтобы быть в центре внимания.",
+        audience: "Для кого: Для технологичных энтузиастов и ценителей спортивного стиля, которые хотят получить максимум от вождения."
+    },
+    trimName: "Premium Sport",
+    year: 2025,
+    engineVolume: "2.0",
+    transmission: "Робот",
+    drivetrain: "Полный привод",
+    status: "У дилера",
+    dealer: "ЛЕОН-АВТО ОНЛАЙН, Краснодар",
+    color: "Морской синий",
+    vin: "SDEF823BSE***01"
   }
 ].filter(car => car.color);
-
-    
-
-    
-
-    
-

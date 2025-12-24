@@ -5,8 +5,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { allCars } from "@/lib/cars";
-import type { Car } from "@/lib/cars";
+import { allModels } from "@/lib/cars";
+import type { Model } from "@/lib/cars";
 
 export default function ModelsPage() {
   return (
@@ -14,54 +14,51 @@ export default function ModelsPage() {
       <SiteHeader />
       <main className="flex-1 w-full bg-background">
         <div className="container mx-auto px-4 md:px-6 py-8">
-          <h1 className="text-3xl md:text-4xl font-bold font-headline mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold font-headline mb-8 text-center">
             Модельный ряд TENET
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {allCars.map((car) => (
-              <Link href={`/models/${car.id}`} key={car.id} className="block">
-                <Card
-                  className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full"
-                >
-                  <CardContent className="p-0 flex flex-col flex-grow">
-                    <div className="relative">
-                      {car.images?.length > 0 && (
-                        <Image
-                          src={car.images[0].imageUrl}
-                          alt={car.name}
-                          width={500}
-                          height={300}
-                          className="object-cover w-full aspect-video"
-                          data-ai-hint={car.images[0].imageHint}
-                        />
-                      )}
-                    </div>
-                    <div className="p-6 flex flex-col flex-grow">
-                      <h3 className="text-2xl font-bold font-headline">
-                        {car.name}
-                      </h3>
-                      <p className="text-muted-foreground mt-1">
-                        {car.bodyType}
+            {allModels.map((model) => (
+              <Card
+                key={model.id}
+                className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full"
+              >
+                <CardContent className="p-0 flex flex-col flex-grow">
+                  <div className="relative">
+                    <Image
+                      src={model.image.imageUrl}
+                      alt={model.name}
+                      width={500}
+                      height={300}
+                      className="object-cover w-full aspect-video"
+                      data-ai-hint={model.image.imageHint}
+                    />
+                  </div>
+                  <div className="p-6 flex flex-col flex-grow">
+                    <h3 className="text-2xl font-bold font-headline">
+                      {model.name}
+                    </h3>
+                    <p className="text-muted-foreground mt-2 flex-grow">
+                      {model.description}
+                    </p>
+                    <div className="mt-4">
+                      <p className="text-xl font-bold">
+                        от {model.price.toLocaleString("ru-RU")} ₽
                       </p>
-                      <div className="mt-4 flex-grow">
-                        <p className="text-xl font-bold">
-                          от {car.price.toLocaleString("ru-RU")} ₽
-                        </p>
-                      </div>
-                      <div className="mt-6 flex flex-col sm:flex-row gap-2">
-                          <Link href={`/models/${car.id}`} passHref>
-                            <Button className="w-full">Подробнее</Button>
-                          </Link>
-                          <Button variant="outline" className="w-full as-link">
-                            <Link href="/#help-form" className="w-full h-full flex items-center justify-center">
-                              Тест-драйв
-                            </Link>
-                          </Button>
-                      </div>
                     </div>
-                  </CardContent>
-                </Card>
-              </Link>
+                    <div className="mt-6 flex flex-col sm:flex-row gap-2">
+                        <Link href={model.link} passHref>
+                          <Button className="w-full">Подробнее</Button>
+                        </Link>
+                        <Button variant="outline" className="w-full as-link">
+                          <Link href="/#help-form" className="w-full h-full flex items-center justify-center">
+                            Тест-драйв
+                          </Link>
+                        </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
