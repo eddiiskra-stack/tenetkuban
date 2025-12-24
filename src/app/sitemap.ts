@@ -3,6 +3,8 @@ import { allCars } from '@/lib/cars';
 
 const URL = 'https://tenet-servis-kuban.ru';
 
+export const revalidate = 0;
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
     {
@@ -31,7 +33,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .filter(id => allCars.find(car => car.id === id)) // Ensure we only create pages for base models
     .map((id) => ({
       url: `${URL}/models/${id}`,
-      lastModified: new Date(),
+      lastModified: new
+Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     }));
