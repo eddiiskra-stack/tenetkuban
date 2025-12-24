@@ -72,6 +72,15 @@ export default function Home() {
     setPriceRange(newRange);
   };
 
+  const handleResetFilters = () => {
+    setGearboxFilter([]);
+    setBodyTypeFilter([]);
+    setSeatsFilter([]);
+    setModelFilter([]);
+    setColorFilter([]);
+    setPriceRange([minPrice, maxPrice]);
+  };
+
   const filteredCars = useMemo(() => {
     let cars = allCars;
 
@@ -145,6 +154,7 @@ export default function Home() {
                 selectedColors={colorFilter}
                 carCount={totalCarCount}
                 onShowClick={handleShowClick}
+                onResetClick={handleResetFilters}
               />
             </aside>
             <div className="lg:col-span-3 space-y-6">

@@ -42,10 +42,16 @@ function StockPageContent() {
       if (!isNaN(min) && !isNaN(max)) {
         setPriceRange([min, max]);
       }
+    } else {
+      setPriceRange([minPrice, maxPrice]);
     }
-  }, [searchParams]);
+  }, [searchParams, minPrice, maxPrice]);
 
-  const updateURLParams = (newFilters: { [key: string]: any }) => {
+  const updateURLParams = (newFilters: { [key: string]: any }, reset = false) => {
+    if (reset) {
+        router.replace('/stock');
+        return;
+    }
     const params = new URLSearchParams(searchParams.toString());
     Object.keys(newFilters).forEach(key => {
       const value = newFilters[key];
@@ -107,6 +113,16 @@ function StockPageContent() {
     updateURLParams({ price: newRange.join(',') });
   };
 
+  const handleResetFilters = () => {
+    setGearboxFilter([]);
+    setBodyTypeFilter([]);
+    setSeatsFilter([]);
+    setModelFilter([]);
+    setColorFilter([]);
+    setPriceRange([minPrice, maxPrice]);
+    updateURLParams({}, true);
+  };
+
   const filteredCars = useMemo(() => {
     let cars = allCars;
 
@@ -162,6 +178,7 @@ function StockPageContent() {
                 onColorChange={handleColorChange}
                 selectedColors={colorFilter}
                 carCount={totalCarCount}
+                onResetClick={handleResetFilters}
                 showButton={false}
               />
             </aside>

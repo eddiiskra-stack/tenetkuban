@@ -1,3 +1,4 @@
+
 "use client";
 import React, { useState } from "react";
 import {
@@ -45,6 +46,7 @@ type CarFiltersProps = {
   selectedColors: string[];
   carCount: number;
   onShowClick?: () => void;
+  onResetClick?: () => void;
   showButton?: boolean;
 };
 
@@ -65,6 +67,7 @@ export function CarFilters({
   selectedColors,
   carCount,
   onShowClick,
+  onResetClick,
   showButton = true,
 }: CarFiltersProps) {
   
@@ -283,7 +286,7 @@ export function CarFilters({
             Показать
           </Button>
         )}
-        <Button variant="outline" className="w-full mt-2">
+        <Button variant="outline" className="w-full mt-2" onClick={onResetClick}>
           Очистить фильтры
         </Button>
       </div>
