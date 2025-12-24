@@ -25,30 +25,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const modelIds = [...new Set(allCars.map(car => {
-    // Only get the base model ID, e.g., "tenet-t4" from "tenet-t4-cvt-line-white"
-    if (car.id.startsWith('tenet-t')) {
+  // Create a Set of unique model IDs (e.g., 'tenet-t4', 'tenet-t7')
+  const modelIds = new Set(
+    allCars.map(car => {
+      if (car.id.startsWith('tenet-t')) {
         const parts = car.id.split('-');
-        if(parts.length >= 2) {
-            return `${parts[0]}-${parts[1]}`;
+        if (parts.length >= 2) {
+          return `${parts[0]}-${parts[1]}`;
         }
-    }
-    return car.id.split('-').slice(0, 2).join('-');
-  }).filter((id): id is string => id !== null && id.startsWith('tenet-t')))];
+      }
+      // Fallback for other potential formats
+      return car.id.split('-').slice(0, 2).join('-');
+    })
+  );
 
-
-  const carModelPages: MetadataRoute.Sitemap = modelIds
+  const carModelPages: MetadataRoute.Sitemap = Array.from(modelIds)
     .map((id) => {
-        const car = allCars.find(c => c.id.startsWith(id));
-        if (!car) return null;
         return {
             url: `${URL}/models/${id}`,
             lastModified: new Date(),
             changeFrequency: 'monthly',
             priority: 0.7,
         }
-    })
-    .filter((page): page is NonNullable<typeof page> => page !== null);
+    });
 
   const carStockPages: MetadataRoute.Sitemap = allCars.map((car) => ({
     url: `${URL}/stock/${car.id}`,
@@ -56,17 +55,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'daily',
     priority: 0.6,
   }));
-  
-  const uniqueCarModelPages = carModelPages.reduce((acc, current) => {
-    if (!acc.find(item => item.url === current.url)) {
-        acc.push(current);
-    }
-    return acc;
-  }, [] as MetadataRoute.Sitemap);
 
   return [
     ...staticPages,
-    ...uniqueCarModelPages,
+    ...carModelPages,
     ...carStockPages,
   ];
 }
