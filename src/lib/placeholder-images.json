@@ -157,6 +157,36 @@
       "imageHint": "suv interior"
     },
     {
+      "id": "tenet-t7-white-1",
+      "description": "White Tenet T7 front view",
+      "imageUrl": "/images/T7white/T7 white 1.webp",
+      "imageHint": "white suv front"
+    },
+    {
+      "id": "tenet-t7-white-2",
+      "description": "White Tenet T7 side profile",
+      "imageUrl": "/images/T7white/T7 white 2.webp",
+      "imageHint": "white suv profile"
+    },
+    {
+      "id": "tenet-t7-white-3",
+      "description": "White Tenet T7 rear quarter view",
+      "imageUrl": "/images/T7white/T7 white 3.webp",
+      "imageHint": "white suv rear"
+    },
+    {
+      "id": "tenet-t7-white-4",
+      "description": "White Tenet T7 interior dashboard",
+      "imageUrl": "/images/T7white/T7 white 4.webp",
+      "imageHint": "suv interior"
+    },
+    {
+      "id": "tenet-t7-white-5",
+      "description": "White Tenet T7 front seats",
+      "imageUrl": "/images/T7white/T7 white 5.webp",
+      "imageHint": "suv interior"
+    },
+    {
       "id": "tenet-8",
       "description": "Tenet 8 model car",
       "imageUrl": "https://1.cdn.perxis.ru/originals/d2mmqa2to5r56gptf740/original",
