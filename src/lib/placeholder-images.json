@@ -187,6 +187,36 @@
       "imageHint": "suv interior"
     },
     {
+      "id": "tenet-t7-silver-1",
+      "description": "Silver Tenet T7 front view",
+      "imageUrl": "/images/T7silver/T7silver 1.webp",
+      "imageHint": "silver suv front"
+    },
+    {
+      "id": "tenet-t7-silver-2",
+      "description": "Silver Tenet T7 side profile",
+      "imageUrl": "/images/T7silver/T7silver 2.webp",
+      "imageHint": "silver suv profile"
+    },
+    {
+      "id": "tenet-t7-silver-3",
+      "description": "Silver Tenet T7 rear quarter view",
+      "imageUrl": "/images/T7silver/T7silver 3.webp",
+      "imageHint": "silver suv rear"
+    },
+    {
+      "id": "tenet-t7-silver-4",
+      "description": "Silver Tenet T7 interior dashboard",
+      "imageUrl": "/images/T7silver/T7silver 4.webp",
+      "imageHint": "suv interior"
+    },
+    {
+      "id": "tenet-t7-silver-5",
+      "description": "Silver Tenet T7 front seats",
+      "imageUrl": "/images/T7silver/T7silver 5.webp",
+      "imageHint": "suv interior"
+    },
+    {
       "id": "tenet-8",
       "description": "Tenet 8 model car",
       "imageUrl": "https://1.cdn.perxis.ru/originals/d2mmqa2to5r56gptf740/original",
