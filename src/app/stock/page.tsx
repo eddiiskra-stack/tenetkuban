@@ -9,6 +9,10 @@ import { HelpForm } from "@/components/help-form";
 import React, { useState, useMemo, useEffect, Suspense } from "react";
 import { allCars } from "@/lib/cars";
 import { useSearchParams, useRouter } from "next/navigation";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { Filter } from "lucide-react";
+
 
 function StockPageContent() {
   const searchParams = useSearchParams();
@@ -169,34 +173,51 @@ function StockPageContent() {
   
   const totalCarCount = filteredCars.length;
 
+  const carFiltersProps = {
+    minPrice,
+    maxPrice,
+    priceRange,
+    onPriceChange: handlePriceChange,
+    onGearboxChange: handleGearboxChange,
+    selectedGearboxes: gearboxFilter,
+    onBodyTypeChange: handleBodyTypeChange,
+    selectedBodyTypes: bodyTypeFilter,
+    onSeatsChange: handleSeatsChange,
+    selectedSeats: seatsFilter,
+    onModelChange: handleModelChange,
+    selectedModels: modelFilter,
+    onColorChange: handleColorChange,
+    selectedColors: colorFilter,
+    onStatusChange: handleStatusChange,
+    selectedStatuses: statusFilter,
+    carCount: totalCarCount,
+    onResetClick: handleResetFilters,
+    showButton: false,
+  };
+
+
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
       <main className="flex-1 w-full bg-background">
         <div className="container mx-auto px-4 md:px-6 py-8">
+            <div className="flex justify-between items-center mb-6 lg:hidden">
+                 <h1 className="text-2xl font-bold font-headline">Фильтры</h1>
+                 <Sheet>
+                    <SheetTrigger asChild>
+                        <Button variant="outline" size="icon">
+                            <Filter className="h-4 w-4" />
+                            <span className="sr-only">Фильтры</span>
+                        </Button>
+                    </SheetTrigger>
+                    <SheetContent side="left" className="overflow-y-auto">
+                        <CarFilters {...carFiltersProps} />
+                    </SheetContent>
+                </Sheet>
+            </div>
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            <aside className="lg:col-span-1">
-              <CarFilters 
-                minPrice={minPrice}
-                maxPrice={maxPrice}
-                priceRange={priceRange}
-                onPriceChange={handlePriceChange}
-                onGearboxChange={handleGearboxChange}
-                selectedGearboxes={gearboxFilter}
-                onBodyTypeChange={handleBodyTypeChange}
-                selectedBodyTypes={bodyTypeFilter}
-                onSeatsChange={handleSeatsChange}
-                selectedSeats={seatsFilter}
-                onModelChange={handleModelChange}
-                selectedModels={modelFilter}
-                onColorChange={handleColorChange}
-                selectedColors={colorFilter}
-                onStatusChange={handleStatusChange}
-                selectedStatuses={statusFilter}
-                carCount={totalCarCount}
-                onResetClick={handleResetFilters}
-                showButton={false}
-              />
+            <aside className="hidden lg:block lg:col-span-1">
+              <CarFilters {...carFiltersProps} />
             </aside>
             <div className="lg:col-span-3 space-y-12">
               <CarListings cars={filteredCars} totalCarCount={totalCarCount} />
@@ -204,8 +225,7 @@ function StockPageContent() {
             </div>
           </div>
         </div>
-      </main>
-      <SiteFooter />
+      </main>      <SiteFooter />
     </div>
   );
 }

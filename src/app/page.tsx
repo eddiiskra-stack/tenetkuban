@@ -8,10 +8,11 @@ import { CarListings } from "@/components/car-listings";
 import { HelpForm } from "@/components/help-form";
 import React, { useState, useMemo } from "react";
 import { allCars } from "@/lib/cars";
-import type { Car } from "@/lib/cars";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Filter } from "lucide-react";
 
 
 export default function Home() {
@@ -138,39 +139,57 @@ export default function Home() {
     router.push(`/stock?${params.toString()}`);
   };
 
+  const carFiltersProps = {
+    minPrice,
+    maxPrice,
+    priceRange,
+    onPriceChange: handlePriceChange,
+    onGearboxChange: handleGearboxChange,
+    selectedGearboxes: gearboxFilter,
+    onBodyTypeChange: handleBodyTypeChange,
+    selectedBodyTypes: bodyTypeFilter,
+    onSeatsChange: handleSeatsChange,
+    selectedSeats: seatsFilter,
+    onModelChange: handleModelChange,
+    selectedModels: modelFilter,
+    onColorChange: handleColorChange,
+    selectedColors: colorFilter,
+    onStatusChange: handleStatusChange,
+    selectedStatuses: statusFilter,
+    carCount: totalCarCount,
+    onShowClick: handleShowClick,
+    onResetClick: handleResetFilters,
+  };
+
 
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
       <main className="flex-1 w-full bg-background">
         <div className="container mx-auto px-4 md:px-6 py-8">
-            <h1 className="text-4xl font-bold text-center mb-4 font-headline">Автомобили TENET в наличии</h1>
-            <p className="text-center text-muted-foreground mb-8">
+            <div className="flex justify-between items-center mb-4">
+              <h1 className="text-3xl md:text-4xl font-bold text-left mb-4 font-headline">Автомобили TENET в наличии</h1>
+              <div className="lg:hidden">
+                <Sheet>
+                    <SheetTrigger asChild>
+                        <Button variant="outline" size="icon">
+                            <Filter className="h-4 w-4" />
+                            <span className="sr-only">Фильтры</span>
+                        </Button>
+                    </SheetTrigger>
+                    <SheetContent side="left" className="overflow-y-auto">
+                        <CarFilters {...carFiltersProps} />
+                    </SheetContent>
+                </Sheet>
+              </div>
+            </div>
+
+            <p className="text-left text-muted-foreground mb-8">
                 Выберите автомобиль своей мечты
             </p>
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            <aside className="lg:col-span-1">
-              <CarFilters 
-                minPrice={minPrice}
-                maxPrice={maxPrice}
-                priceRange={priceRange}
-                onPriceChange={handlePriceChange}
-                onGearboxChange={handleGearboxChange}
-                selectedGearboxes={gearboxFilter}
-                onBodyTypeChange={handleBodyTypeChange}
-                selectedBodyTypes={bodyTypeFilter}
-                onSeatsChange={handleSeatsChange}
-                selectedSeats={seatsFilter}
-                onModelChange={handleModelChange}
-                selectedModels={modelFilter}
-                onColorChange={handleColorChange}
-                selectedColors={colorFilter}
-                onStatusChange={handleStatusChange}
-                selectedStatuses={statusFilter}
-                carCount={totalCarCount}
-                onShowClick={handleShowClick}
-                onResetClick={handleResetFilters}
-              />
+            <aside className="hidden lg:block lg:col-span-1">
+                <CarFilters {...carFiltersProps} />
             </aside>
             <div className="lg:col-span-3 space-y-6">
               <CarListings cars={filteredCars.slice(0, 4)} totalCarCount={totalCarCount} isHomePage />
