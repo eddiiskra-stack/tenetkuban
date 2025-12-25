@@ -167,9 +167,7 @@ function StockPageContent() {
     return cars;
   }, [gearboxFilter, bodyTypeFilter, seatsFilter, modelFilter, colorFilter, statusFilter, priceRange]);
   
-  const totalCarCount = useMemo(() => {
-    return filteredCars.reduce((total, car) => total + car.count, 0);
-  }, [filteredCars]);
+  const totalCarCount = filteredCars.length;
 
   return (
     <div className="flex min-h-screen flex-col">

@@ -123,9 +123,7 @@ export default function Home() {
     return cars;
   }, [gearboxFilter, bodyTypeFilter, seatsFilter, priceRange, modelFilter, colorFilter, statusFilter]);
   
-  const totalCarCount = useMemo(() => {
-    return filteredCars.reduce((total, car) => total + car.count, 0);
-  }, [filteredCars]);
+  const totalCarCount = filteredCars.length;
 
   const handleShowClick = () => {
     const params = new URLSearchParams();
