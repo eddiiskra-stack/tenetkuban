@@ -98,6 +98,14 @@ export function CarFilters({
     'Tenet T8': allCars.filter(car => car.name === 'Tenet T8').length,
   };
 
+  const availableCarColors = React.useMemo(() => {
+    return new Set(allCars.map(car => car.color));
+  }, []);
+
+  const availableColors = React.useMemo(() => {
+    return colors.filter(color => availableCarColors.has(color.name));
+  }, [availableCarColors]);
+
 
   return (
     <div className="p-6 bg-card rounded-lg shadow-sm border">
@@ -188,7 +196,7 @@ export function CarFilters({
             <AccordionTrigger className="text-sm font-semibold">ЦВЕТ</AccordionTrigger>
             <AccordionContent>
                 <div className="grid grid-cols-6 gap-2 pt-2">
-                    {colors.map((color) => (
+                    {availableColors.map((color) => (
                          <button 
                             key={color.name}
                             className={cn(
@@ -296,3 +304,4 @@ export function CarFilters({
     </div>
   );
 }
+
