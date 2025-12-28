@@ -13,10 +13,10 @@ export function HelpForm() {
       </CardHeader>
       <CardContent className="px-0">
         <iframe
-          id="YandexForm-69426e14e010db1d42df9734"
+          id="YandexForm-69426d1895add51dc98b023d"
           title="Tenet Lead Form"
           style={{ width: '100%', minHeight: '350px', border: 'none' }}
-          src="https://forms.yandex.ru/cloud/69426e14e010db1d42df9734/?iframe=1"
+          src="https://forms.yandex.ru/u/69426d1895add51dc98b023d/?iframe=1"
           allowFullScreen
           allow="geolocation; microphone; camera"
         >
