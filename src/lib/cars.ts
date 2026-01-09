@@ -60,7 +60,7 @@ export const allModels: Model[] = [
         description: 'Компактный городской кроссовер для тех, кто живет в ритме мегаполиса. Стильный дизайн, маневренность и экономичный расход топлива делают его идеальным спутником в плотном трафике.',
         image: PlaceHolderImages.find((img) => img.id === 'tenet-4')!,
         price: 1999000,
-        link: '/models/tenet-t4-mt-line-white'
+        link: '/models/t4'
     },
     {
         id: 't7',
@@ -68,7 +68,7 @@ export const allModels: Model[] = [
         description: 'Вместительный и надежный внедорожник, созданный для путешествий и семейных поездок. Мощный двигатель, просторный салон и богатое оснащение обеспечивают комфорт и безопасность.',
         image: PlaceHolderImages.find((img) => img.id === 'tenet-7')!,
         price: 2630000,
-        link: '/models/vin-EDEFB32BSE---01'
+        link: '/models/t7'
     },
     {
         id: 't8',
@@ -76,7 +76,7 @@ export const allModels: Model[] = [
         description: 'Яркий и технологичный лифтбек для тех, кто ценит динамику и передовые решения. Футуристичный дизайн, впечатляющая мощность и интеллектуальные системы помощи водителю.',
         image: PlaceHolderImages.find((img) => img.id === 'tenet-8')!,
         price: 3399900,
-        link: '/models/tenet-t8-premium-sport-blue'
+        link: '/models/t8'
     }
 ];
 
@@ -1117,6 +1117,7 @@ export const allCars: Car[] = [
 ].filter(car => car.color);
 
     
+
 
 
 
