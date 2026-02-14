@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import Script from "next/script";
+import { CookieBanner } from "@/components/cookie-banner";
 
 export const metadata: Metadata = {
   title: {
@@ -61,6 +62,7 @@ export default function RootLayout({
         <noscript><div><img src="https://mc.yandex.ru/watch/106067819" style={{position:'absolute', left:'-9999px'}} alt="" /></div></noscript>
         {children}
         <Toaster />
+        <CookieBanner />
       </body>
     </html>
   );
